@@ -1,0 +1,2200 @@
+Program.Sub.ScreenSU.Start
+Gui.F_SalesAnal..Create
+Gui.F_SalesAnal..Caption("Sales / Cost of Sales Analysis")
+Gui.F_SalesAnal..Size(16020,11805)
+Gui.F_SalesAnal..MinX(0)
+Gui.F_SalesAnal..MinY(0)
+Gui.F_SalesAnal..Position(0,0)
+Gui.F_SalesAnal..BackColor(-2147483633)
+Gui.F_SalesAnal..MousePointer(0)
+Gui.F_SalesAnal..Event(UnLoad,Unload)
+Gui.F_SalesAnal..ContextMenuCreate("ctxAnalExport")
+Gui.F_SalesAnal..ContextMenuAddItem("ctxAnalExport","Export",0,"Export")
+Gui.F_SalesAnal..ContextMenuSetItemEventHandler("ctxAnalExport","Export","ExportToExcel")
+Gui.F_SalesAnal..ContextMenuCreate("ctxAcctExport")
+Gui.F_SalesAnal..ContextMenuAddItem("ctxAcctExport","Export",0,"Export")
+Gui.F_SalesAnal..ContextMenuSetItemEventHandler("ctxAcctExport","Export","ExportToExcel")
+Gui.F_SalesAnal..ContextMenuCreate("ctxReconSAExport")
+Gui.F_SalesAnal..ContextMenuAddItem("ctxReconSAExport","Export",0,"Export")
+Gui.F_SalesAnal..ContextMenuSetItemEventHandler("ctxReconSAExport","Export","ExportToExcel")
+Gui.F_SalesAnal..ContextMenuCreate("ctxReconDBExport")
+Gui.F_SalesAnal..ContextMenuAddItem("ctxReconDBExport","Export",0,"Export")
+Gui.F_SalesAnal..ContextMenuSetItemEventHandler("ctxReconDBExport","Export","ExportToExcel")
+Gui.F_SalesAnal..ContextMenuCreate("ctxAccrSAExport")
+Gui.F_SalesAnal..ContextMenuAddItem("ctxAccrSAExport","Export",0,"Export")
+Gui.F_SalesAnal..ContextMenuSetItemEventHandler("ctxAccrSAExport","Export","ExportToExcel")
+Gui.F_SalesAnal..ContextMenuCreate("ctxAccrDBExport")
+Gui.F_SalesAnal..ContextMenuAddItem("ctxAccrDBExport","Export",0,"Export")
+Gui.F_SalesAnal..ContextMenuSetItemEventHandler("ctxAccrDBExport","Export","ExportToExcel")
+Gui.F_SalesAnal.dtpFrom.Create(DatePicker)
+Gui.F_SalesAnal.dtpFrom.Size(1935,285)
+Gui.F_SalesAnal.dtpFrom.Position(870,150)
+Gui.F_SalesAnal.dtpTo.Create(DatePicker)
+Gui.F_SalesAnal.dtpTo.Size(1935,285)
+Gui.F_SalesAnal.dtpTo.Position(3615,165)
+Gui.F_SalesAnal.cmdRefresh.Create(Button)
+Gui.F_SalesAnal.cmdRefresh.Size(855,375)
+Gui.F_SalesAnal.cmdRefresh.Position(5715,135)
+Gui.F_SalesAnal.cmdRefresh.Caption("REFRESH")
+Gui.F_SalesAnal.cmdRefresh.Event(Click,RefreshData)
+Gui.F_SalesAnal.lbl1.Create(Label,"From:",True,585,255,0,225,240,True,0,"Arial",8,-2147483633,0)
+Gui.F_SalesAnal.lbl2.Create(Label,"To:",True,465,255,0,3075,225,True,0,"Arial",8,-2147483633,0)
+Gui.F_SalesAnal.tabMst.Create(Tab)
+Gui.F_SalesAnal.tabMst.Size(15555,8340)
+Gui.F_SalesAnal.tabMst.Position(90,645)
+Gui.F_SalesAnal.tabMst.Anchor(15)
+Gui.F_SalesAnal.tabMst.Tabs(4)
+Gui.F_SalesAnal.tabMst.SetTab(0)
+Gui.F_SalesAnal.tabMst.Caption("Sales Analysis")
+Gui.F_SalesAnal.tabMst.SetTab(1)
+Gui.F_SalesAnal.tabMst.Caption("Sales Accounts")
+Gui.F_SalesAnal.tabMst.SetTab(2)
+Gui.F_SalesAnal.tabMst.Caption("Reconciliation")
+Gui.F_SalesAnal.tabMst.SetTab(3)
+Gui.F_SalesAnal.tabMst.Caption("Accruals")
+Gui.F_SalesAnal.gsgcSalesAnal.Create(GsGridControl)
+Gui.F_SalesAnal.gsgcSalesAnal.Size(15120,7710)
+Gui.F_SalesAnal.gsgcSalesAnal.Position(150,90)
+Gui.F_SalesAnal.gsgcSalesAnal.Anchor(15)
+Gui.F_SalesAnal.gsgcSalesAnal.Parent("tabMst",0)
+Gui.F_SalesAnal.gsgcSalesAnal.ContextMenuAttach("ctxAnalExport")
+Gui.F_SalesAnal.gsgcSalesAccts.Create(GsGridControl)
+Gui.F_SalesAnal.gsgcSalesAccts.Size(15105,7725)
+Gui.F_SalesAnal.gsgcSalesAccts.Position(120,150)
+Gui.F_SalesAnal.gsgcSalesAccts.Parent("tabMst",1)
+Gui.F_SalesAnal.gsgcSalesAccts.Anchor(15)
+Gui.F_SalesAnal.gsgcSalesAccts.ContextMenuAttach("ctxAcctExport")
+Gui.F_SalesAnal.gsgcReconSales.Create(GsGridControl)
+Gui.F_SalesAnal.gsgcReconSales.Size(15210,4275)
+Gui.F_SalesAnal.gsgcReconSales.Position(135,90)
+Gui.F_SalesAnal.gsgcReconSales.Parent("tabMst",2)
+Gui.F_SalesAnal.gsgcReconSales.Anchor(13)
+Gui.F_SalesAnal.gsgcReconSales.ContextMenuAttach("ctxReconSAExport")
+Gui.F_SalesAnal.gsgcReconDebts.Create(GsGridControl)
+Gui.F_SalesAnal.gsgcReconDebts.Size(15210,3345)
+Gui.F_SalesAnal.gsgcReconDebts.Position(135,4455)
+Gui.F_SalesAnal.gsgcReconDebts.Parent("tabMst",2)
+Gui.F_SalesAnal.gsgcReconDebts.Anchor(15)
+Gui.F_SalesAnal.gsgcReconDebts.ContextMenuAttach("ctxReconDBExport")
+Gui.F_SalesAnal.gsgcAccrSales.Create(GsGridControl)
+Gui.F_SalesAnal.gsgcAccrSales.Size(15210,4275)
+Gui.F_SalesAnal.gsgcAccrSales.Position(105,120)
+Gui.F_SalesAnal.gsgcAccrSales.Parent("tabMst",3)
+Gui.F_SalesAnal.gsgcAccrSales.Anchor(13)
+Gui.F_SalesAnal.gsgcAccrSales.ContextMenuAttach("ctxAccrSAExport")
+Gui.F_SalesAnal.gsgcAccrDebts.Create(GsGridControl)
+Gui.F_SalesAnal.gsgcAccrDebts.Size(15210,3375)
+Gui.F_SalesAnal.gsgcAccrDebts.Position(105,4470)
+Gui.F_SalesAnal.gsgcAccrDebts.Parent("tabMst",3)
+Gui.F_SalesAnal.gsgcAccrDebts.Anchor(15)
+Gui.F_SalesAnal.gsgcAccrDebts.ContextMenuAttach("ctxAccrDBExport")
+Gui.F_SalesAnal.gsgcTotals.Create(GsGridControl)
+Gui.F_SalesAnal.gsgcTotals.Size(12090,2100)
+Gui.F_SalesAnal.gsgcTotals.Position(255,9105)
+Gui.F_SalesAnal.gsgcTotals.Anchor(6)
+Gui.F_SalesAnal.chkPost.Create(CheckBox)
+Gui.F_SalesAnal.chkPost.Size(3390,360)
+Gui.F_SalesAnal.chkPost.Position(7020,90)
+Gui.F_SalesAnal.chkPost.Caption("Use Post Date")
+Gui.F_SalesAnal.chkPost.Value(1)
+Gui.F_SalesAnal.chkPost.Event(Click,CheckingCheckboxes)
+Gui.F_SalesAnal.chkInvoice.Create(CheckBox)
+Gui.F_SalesAnal.chkInvoice.Size(3390,360)
+Gui.F_SalesAnal.chkInvoice.Position(7020,465)
+Gui.F_SalesAnal.chkInvoice.Caption("Use Invoice Date")
+Gui.F_SalesAnal.chkInvoice.Event(Click,CheckingCheckboxes)
+Gui.F_SalesAnal.pbMain.Create(ProgressBar)
+Gui.F_SalesAnal.pbMain.Size(5190,255)
+Gui.F_SalesAnal.pbMain.Position(10335,465)
+Gui.F_SalesAnal.pbMain.Visible(False)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'Customer: Harding Display
+'Developer: FEQ (Sisco)
+'Date: 12/28/2020
+'This is a sales analysis dashboard for Harding.
+'Harding had a view created for them by Global Shop called V_INVOICE_DATETIME: 
+
+'--------------------------Their custom table  information
+'CREATE VIEW "V_INVOICE_DATETIME" AS SELECT "GCG_INVOICE_DATETIME" ."KEY_ID" , "GCG_INVOICE_DATETIME" ."INVOICE_NO" , "GCG_INVOICE_DATETIME" ."ORDER_NO" , "GCG_INVOICE_DATETIME" ."ORDER_SUFFIX" , "GCG_INVOICE_DATETIME" ."BATCH_NO" , "GCG_INVOICE_DATETIME" ."DATE_INVOICE" , "GCG_INVOICE_DATETIME" ."TIME_INVOICE" FROM "GCG_INVOICE_DATETIME"  "GCG_INVOICE_DATETIME" ;
+'CREATE TABLE "GCG_INVOICE_DATETIME" (
+' "KEY_ID" IDENTITY DEFAULT '0' CONSTRAINT "UK_KEY_ID" UNIQUE USING 0,
+' "INVOICE_NO" CHAR(50) NOT NULL,
+' "ORDER_NO" CHAR(7),
+' "ORDER_SUFFIX" CHAR(4),
+' "BATCH_NO" CHAR(5),
+' "DATE_INVOICE" DATE,
+' "TIME_INVOICE" TIME );
+'ALTER TABLE "GCG_INVOICE_DATETIME" IN DICTIONARY ADD CONSTRAINT "PK_KEY_ID" PRIMARY KEY ("KEY_ID") USING 0;
+'
+'We are going to be loading information from the sales order tables based off the date_invoice column in the custom table
+'The user will open the dashboard and select a date range. The script will then access the sales order data from the custom table and load it into the dashboard.
+'The dashboard will include two grids: The information for the sales order and a piece with GL information details.
+
+F.Intrinsic.Control.Try
+
+'Initiation involves hiding the grid and displaying the form for the user to select a date range and refresh the information.
+Gui.F_SalesAnal.gsgcSalesAnal.Visible(False)
+Gui.F_SalesAnal.gsgcSalesAccts.Visible(False)
+Gui.F_SalesAnal.gsgcReconSales.Visible(False)
+Gui.F_SalesAnal.gsgcReconDebts.Visible(False)
+Gui.F_SalesAnal.gsgcTotals.Visible(False)
+Gui.F_SalesAnal.tabMst.SetTab(0)
+Gui.F_SalesAnal..Show
+
+F.Intrinsic.Control.Catch
+F.Intrinsic.Control.CallSub(Error, "Subroutine", V.Ambient.CurrentSubroutine, "ErrorDesc", V.Ambient.ErrorDescription, "ErrorNo", V.Ambient.ErrorNumber)
+F.Intrinsic.Control.EndTry
+Program.Sub.Main.End
+
+Program.Sub.Error.Start
+F.Intrinsic.Control.Try
+V.Local.sError.Declare(String, "")
+
+F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}", V.Caller.ScriptFile, V.Ambient.Newline, V.Args.Subroutine, V.Args.ErrorNo, V.Args.ErrorDesc, V.Ambient.GABVersion, V.Local.sError)
+
+F.Intrinsic.UI.Msgbox(V.Local.sError, "CRITICAL ERROR")
+
+F.Intrinsic.Control.Catch
+F.Intrinsic.Control.Exitsub
+F.Intrinsic.Control.EndTry
+Program.Sub.Error.End
+
+Program.Sub.RefreshData.Start
+F.Intrinsic.Control.Try
+V.Local.sSQL.Declare(String, "")
+V.Local.sDateRange.Declare(String, "")
+V.Local.dFrom.Declare(Date, "01/01/1900")
+V.Local.dTo.Declare(Date, "01/01/1900")
+
+'Verify the dates are placed correctly
+F.Intrinsic.Control.If(V.Screen.F_SalesAnal!dtpFrom.Value, >, V.Screen.F_SalesAnal!dtpTo.Value)
+	'Error in dates
+	F.Intrinsic.UI.Msgbox("Please verify your dates before proceeding.", "INCORRECT ORDER IN DATES")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+Gui.F_SalesAnal..Visible(False)
+
+F.Intrinsic.UI.InvokeWaitDialog("Initializing", "LOADING GRIDS")
+
+Gui.F_SalesAnal.gsgcSalesAnal.SuspendLayout
+Gui.F_SalesAnal.gsgcSalesAnal.Visible(False)
+Gui.F_SalesAnal.gsgcSalesAccts.SuspendLayout
+Gui.F_SalesAnal.gsgcSalesAccts.Visible(False)
+Gui.F_SalesAnal.gsgcReconSales.SuspendLayout
+Gui.F_SalesAnal.gsgcReconSales.Visible(False)
+Gui.F_SalesAnal.gsgcReconDebts.SuspendLayout
+Gui.F_SalesAnal.gsgcReconDebts.Visible(False)
+Gui.F_SalesAnal.gsgcTotals.SuspendLayout
+Gui.F_SalesAnal.gsgcTotals.Visible(False)
+Gui.F_SalesAnal.gsgcAccrDebts.SuspendLayout
+Gui.F_SalesAnal.gsgcAccrDebts.Visible(False)
+Gui.F_SalesAnal.gsgcAccrSales.SuspendLayout
+Gui.F_SalesAnal.gsgcAccrSales.Visible(False)
+
+'Check to see if the main datatable is open, and if so, we close out everything..
+F.Intrinsic.Control.If(V.DataTable.dtDisplay.Exists, =, True)
+	
+	'Most of these tables are used for the grids
+	F.Data.DataTable.Close("dtTotals")
+	F.Data.DataView.Close("dtReconDebts", "dvToDisplay")
+	F.Data.DataTable.Close("dtReconDebts")
+	F.Data.DataView.Close("dtReconSales", "dvToDisplay")
+	F.Data.DataTable.Close("dtReconSales")
+	F.Data.DataTable.Close("dtLCTJGuided")
+	F.Data.DataTable.Close("dtJobs")
+	F.Data.DataView.Close("dtDispRecon", "dvReconDebts")
+	F.Data.DataView.Close("dtDispRecon", "dvReconSales")
+	F.Data.DataTable.Close("dtDispRecon")
+	F.Data.DataView.Close("dtDispAccruals", "dvAccrSales")
+	F.Data.DataView.Close("dtDispAccruals", "dvAccrDebts")
+	F.Data.DataTable.Close("dtDispAccruals")
+	F.Data.DataTable.Close("dtDispPrime")	
+	F.Data.DataTable.Close("dtDisplay")
+	
+F.Intrinsic.Control.EndIf
+
+F.ODBC.Connection!conx.OpenCompanyConnection
+
+F.Intrinsic.UI.ChangeWaitStatus("Grabbing order information for selected range")
+F.Intrinsic.Control.CallSub(SalesAnalysisPopulation)
+F.Intrinsic.UI.ChangeWaitStatus("Loading GL account information")
+F.Intrinsic.Control.CallSub(SalesAccountsPopulation)
+F.Intrinsic.UI.ChangeWaitStatus("Loading reconciliation information")
+F.Intrinsic.Control.CallSub(SalesReconciliationPopulation)
+F.Intrinsic.UI.ChangeWaitStatus("Loading accruals information")
+F.Intrinsic.Control.CallSub(SalesAccrualsPopulation)
+F.Intrinsic.UI.ChangeWaitStatus("Calculating totals")
+F.Intrinsic.Control.CallSub(TotalsPopulation)
+F.Intrinsic.UI.ChangeWaitStatus("Generaing the grids")
+F.Intrinsic.Control.CallSub(GridProperties)
+
+F.ODBC.Connection!conx.Close
+
+gui.F_SalesAnal.gsgcAccrSales.Visible(True)
+gui.F_SalesAnal.gsgcAccrSales.ResumeLayout
+gui.F_SalesAnal.gsgcAccrDebts.Visible(True)
+gui.F_SalesAnal.gsgcAccrDebts.ResumeLayout
+gui.F_SalesAnal.gsgcTotals.Visible(True)
+gui.F_SalesAnal.gsgcTotals.ResumeLayout
+gui.F_SalesAnal.gsgcReconDebts.Visible(True)
+gui.F_SalesAnal.gsgcReconDebts.ResumeLayout
+gui.F_SalesAnal.gsgcReconSales.Visible(True)
+gui.F_SalesAnal.gsgcReconSales.ResumeLayout
+Gui.F_SalesAnal.gsgcSalesAccts.Visible(True)
+Gui.F_SalesAnal.gsgcSalesAccts.ResumeLayout
+Gui.F_SalesAnal.gsgcSalesAnal.Visible(True)
+Gui.F_SalesAnal.gsgcSalesAnal.ResumeLayout
+
+F.Intrinsic.UI.CloseWaitDialog
+
+Gui.F_SalesAnal..Visible(True)
+
+F.Intrinsic.Control.Catch
+F.Intrinsic.Control.CallSub(Error, "Subroutine", V.Ambient.CurrentSubroutine, "ErrorDesc", V.Ambient.ErrorDescription, "ErrorNo", V.Ambient.ErrorNumber)
+F.Intrinsic.Control.EndTry
+Program.Sub.RefreshData.End
+
+Program.Sub.Unload.Start
+F.Intrinsic.Control.Try
+
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.Catch
+F.Intrinsic.Control.CallSub(Error, "Subroutine", V.Ambient.CurrentSubroutine, "ErrorDesc", V.Ambient.ErrorDescription, "ErrorNo", V.Ambient.ErrorNumber)
+F.Intrinsic.Control.End
+F.Intrinsic.Control.EndTry
+Program.Sub.Unload.End
+
+Program.Sub.GridProperties.Start
+F.Intrinsic.Control.Try
+
+'We make the grids out of the tables and set up the properties.
+Gui.F_SalesAnal.gsgcSalesAnal.AddGridviewFromDatatable("gridRecon", "dtDisplay")
+
+Gui.F_SalesAnal.gsgcSalesAnal.SetGridviewProperty("gridRecon", "MultiSelect", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetGridviewProperty("gridRecon", "AllowSort", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetGridviewProperty("gridRecon", "AllowFilter", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetGridviewProperty("gridRecon", "OptionsViewColumnAutoWidth", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetGridviewProperty("gridRecon", "OptionsFindAlwaysVisible", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetGridviewProperty("gridRecon", "OptionsViewShowAutoFilterRow", False)
+
+'Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "CUSTOMER", "Visible", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_LINE", "Visible", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "COST", "Visible", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PRICE", "Visible", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "KEY_FIELD", "Visible", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "Key_SOLN", "Visible", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "VALIDATION", "Visible", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ADDL_COST", "Visible", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "FINAL_COST", "Visible", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PROJECT_HEAD", "Visible", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PROJECT_HIST", "Visible", False)
+'Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "JOB_SUFFIX", "Visible", False)
+
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_NO_ANAL", "Caption", "SO # for Analysis")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "NAME_CUSTOMER", "Caption", "Customer Name")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "CUSTOMER", "Caption", "Customer No")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_NO", "Caption", "ORDER #")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_SUFFIX", "Caption", "ORDER SUFFIX")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "BLANKET_NO_H", "Caption", "BLANKET NO.")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "SALESPERSON", "Caption", "SP")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "INVOICE", "Caption", "INVOICE")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "LINE_TYPE", "Caption", "LINE TYPE")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PART", "Caption", "PART/LCTJ WO")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PRODUCT_LINE", "Caption", "Product Line")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "QTY_SHIPPED", "Caption", "QTY SHIPPED")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "EXT_PRICE", "Caption", "Ext Price")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "EXT_COST", "Caption", "Ext Cost")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "LCTJ", "Caption", "LCTJ")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "TOTAL_COST", "Caption", "Total Cost")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PROFIT_LINE", "Caption", "Profit")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "MARGIN_LINE", "Caption", "Margin Analysis")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "DATE_INVOICE", "Caption", "Date Invoice")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "CUSTOM_DATE", "Caption", "Post Date")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "DESCRIPTION", "Caption", "Description")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PROJECT_NO", "Caption", "Project Name")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "JOB_SUFFIX", "Caption", "Job/Suffix")
+'Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ADDL_COST", "Caption", "Additional Cost")
+'Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "FINAL_COST", "Caption", "Final Cost")
+
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_NO_ANAL", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "NAME_CUSTOMER", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "CUSTOMER", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_NO", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_SUFFIX", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "BLANKET_NO_H", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "SALESPERSON", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "INVOICE", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "LINE_TYPE", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PART", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PRODUCT_LINE", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "QTY_SHIPPED", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "EXT_PRICE", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "EXT_COST", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "LCTJ", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "TOTAL_COST", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PROFIT_LINE", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "MARGIN_LINE", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "DATE_INVOICE", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "CUSTOM_DATE", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "DESCRIPTION", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PROJECT_NO", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "JOB_SUFFIX", "HeaderFontBold", True)
+'Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ADDL_COST", "HeaderFontBold", True)
+'Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "FINAL_COST", "HeaderFontBold", True)
+
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_NO_ANAL", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "NAME_CUSTOMER", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "CUSTOMER", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_NO", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_SUFFIX", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "BLANKET_NO_H", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "SALESPERSON", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "INVOICE", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "LINE_TYPE", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PART", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PRODUCT_LINE", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "QTY_SHIPPED", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "EXT_PRICE", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "EXT_COST", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "LCTJ", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "TOTAL_COST", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PROFIT_LINE", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "MARGIN_LINE", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "DATE_INVOICE", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "CUSTOM_DATE", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "DESCRIPTION", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PROJECT_NO", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "JOB_SUFFIX", "MinWidth", 50)
+'Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ADDL_COST", "MinWidth", 50)
+'Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "FINAL_COST", "MinWidth", 50)
+
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_NO_ANAL", "Width", 150)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "NAME_CUSTOMER", "Width", 200)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "CUSTOMER", "Width", 200)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_NO", "Width", 150)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_SUFFIX", "Width", 100)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "BLANKET_NO_H", "Width", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "SALESPERSON", "Width", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "INVOICE", "Width", 150)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "LINE_TYPE", "Width", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PART", "Width", 200)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PRODUCT_LINE", "Width", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "QTY_SHIPPED", "Width", 100)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "EXT_PRICE", "Width", 100)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "EXT_COST", "Width", 100)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "LCTJ", "Width", 100)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "TOTAL_COST", "Width", 100)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PROFIT_LINE", "Width", 100)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "MARGIN_LINE", "Width", 100)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "DATE_INVOICE", "Width", 100)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "CUSTOM_DATE", "Width", 100)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "DESCRIPTION", "Width", 250)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PROJECT_NO", "Width", 50)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "JOB_SUFFIX", "Width", 50)
+'Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ADDL_COST", "Width", 100)
+'Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "FINAL_COST", "Width", 100)
+
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_NO_ANAL", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "NAME_CUSTOMER", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "CUSTOMER", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_NO", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_SUFFIX", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "BLANKET_NO_H", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "SALESPERSON", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "INVOICE", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "LINE_TYPE", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PART", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PRODUCT_LINE", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "QTY_SHIPPED", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "EXT_PRICE", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "EXT_COST", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "LCTJ", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "TOTAL_COST", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PROFIT_LINE", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "MARGIN_LINE", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "DATE_INVOICE", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "CUSTOM_DATE", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "DESCRIPTION", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PROJECT_NO", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "JOB_SUFFIX", "ReadOnly", True)
+'Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ADDL_COST", "ReadOnly", True)
+'Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "FINAL_COST", "ReadOnly", True)
+
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_NO_ANAL", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "NAME_CUSTOMER", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "CUSTOMER", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_NO", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_SUFFIX", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "BLANKET_NO_H", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "SALESPERSON", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "INVOICE", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "LINE_TYPE", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PART", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PRODUCT_LINE", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "QTY_SHIPPED", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "EXT_PRICE", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "EXT_COST", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "LCTJ", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "TOTAL_COST", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PROFIT_LINE", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "MARGIN_LINE", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "DATE_INVOICE", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "CUSTOM_DATE", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "DESCRIPTION", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PROJECT_NO", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "JOB_SUFFIX", "AllowEdit", False)
+'Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ADDL_COST", "AllowEdit", False)
+'Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "FINAL_COST", "AllowEdit", False)
+
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_NO_ANAL", "VisibleIndex", 1)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "NAME_CUSTOMER", "VisibleIndex", 2)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "CUSTOMER", "VisibleIndex", 3)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_NO", "VisibleIndex", 4)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ORDER_SUFFIX", "VisibleIndex", 5)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "BLANKET_NO_H", "VisibleIndex", 6)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "SALESPERSON", "VisibleIndex", 7)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "INVOICE", "VisibleIndex", 8)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "LINE_TYPE", "VisibleIndex", 9)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PART", "VisibleIndex", 10)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PRODUCT_LINE", "VisibleIndex", 11)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "QTY_SHIPPED", "VisibleIndex", 12)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "EXT_PRICE", "VisibleIndex", 13)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "EXT_COST", "VisibleIndex", 14)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "LCTJ", "VisibleIndex", 15)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "TOTAL_COST", "VisibleIndex", 16)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PROFIT_LINE", "VisibleIndex", 17)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "MARGIN_LINE", "VisibleIndex", 18)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "DATE_INVOICE", "VisibleIndex", 19)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "CUSTOM_DATE", "VisibleIndex", 20)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "DESCRIPTION", "VisibleIndex", 21)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "PROJECT_NO", "VisibleIndex", 22)
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "JOB_SUFFIX", "VisibleIndex", 23)
+'Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "ADDL_COST", "VisibleIndex", 22)
+'Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon", "FINAL_COST", "VisibleIndex", 23)
+
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon","DATE_INVOICE","DisplayCustomDatetime","d")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon","CUSTOM_DATE","DisplayCustomDatetime","d")
+
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon","QTY_SHIPPED","DisplayCustomNumeric","#,###,###,##0.0000")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon","EXT_PRICE","DisplayCustomNumeric","#,###,###,##0.0000")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon","EXT_COST","DisplayCustomNumeric","#,###,###,##0.0000")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon","LCTJ","DisplayCustomNumeric","#,###,###,##0.0000")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon","TOTAL_COST","DisplayCustomNumeric","#,###,###,##0.0000")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon","PROFIT_LINE","DisplayCustomNumeric","#,###,###,##0.0000")
+Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon","MARGIN_LINE","DisplayCustomNumeric","#,###,###,##0.0000")
+'Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon","ADDL_COST","DisplayCustomNumeric","#,###,###,##0.0000")
+'Gui.F_SalesAnal.gsgcSalesAnal.SetColumnProperty("gridRecon","FINAL_COST","DisplayCustomNumeric","#,###,###,##0.0000")
+
+Gui.F_SalesAnal.gsgcSalesAnal.MainView("gridRecon")
+
+'This is for the second grid:
+Gui.F_SalesAnal.gsgcSalesAccts.AddGridviewFromDatatable("gridAccts", "dtDispPrime")
+
+Gui.F_SalesAnal.gsgcSalesAccts.SetGridviewProperty("gridAccts", "MultiSelect", False)
+Gui.F_SalesAnal.gsgcSalesAccts.SetGridviewProperty("gridAccts", "AllowSort", False)
+Gui.F_SalesAnal.gsgcSalesAccts.SetGridviewProperty("gridAccts", "AllowFilter", False)
+Gui.F_SalesAnal.gsgcSalesAccts.SetGridviewProperty("gridAccts", "OptionsViewColumnAutoWidth", False)
+Gui.F_SalesAnal.gsgcSalesAccts.SetGridviewProperty("gridAccts", "OptionsFindAlwaysVisible", False)
+Gui.F_SalesAnal.gsgcSalesAccts.SetGridviewProperty("gridAccts", "OptionsViewShowAutoFilterRow", False)
+
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_DESC", "Caption", "Account Description")
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_NO", "Caption", "Account Number")
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_Trans", "Caption", "Account Amount")
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_DESC", "Caption", "Account Description")
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_NO", "Caption", "Account Number")
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_Trans", "Caption", "Account Amount")
+
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_DESC", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_NO", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_Trans", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_DESC", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_NO", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_Trans", "HeaderFontBold", True)
+
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_DESC", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_NO", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_Trans", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_DESC", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_NO", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_Trans", "MinWidth", 50)
+
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_DESC", "Width", 250)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_NO", "Width", 100)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_Trans", "Width", 150)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_DESC", "Width", 250)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_NO", "Width", 100)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_Trans", "Width", 150)
+
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_DESC", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_NO", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_Trans", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_DESC", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_NO", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_Trans", "ReadOnly", True)
+
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_DESC", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_NO", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_Trans", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_DESC", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_NO", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_Trans", "AllowEdit", False)
+
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_DESC", "VisibleIndex", 0)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_NO", "VisibleIndex", 1)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_Trans", "VisibleIndex", 2)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_DESC", "VisibleIndex", 3)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_NO", "VisibleIndex", 4)
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_Trans", "VisibleIndex", 5)
+
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "SA_Trans", "DisplayCustomNumeric", "#,###,###,##0.0000")
+Gui.F_SalesAnal.gsgcSalesAccts.SetColumnProperty("gridAccts", "DA_Trans", "DisplayCustomNumeric", "#,###,###,##0.0000")
+
+Gui.F_SalesAnal.gsgcSalesAccts.MainView("gridAccts")
+
+'The reconciliation grids:
+Gui.F_SalesAnal.gsgcReconSales.AddGridviewFromDataview("gridReconSales", "dtDispRecon", "dvReconSales")
+
+Gui.F_SalesAnal.gsgcReconSales.SetGridviewProperty("gridReconSales", "MultiSelect", False)
+Gui.F_SalesAnal.gsgcReconSales.SetGridviewProperty("gridReconSales", "AllowSort", True)
+Gui.F_SalesAnal.gsgcReconSales.SetGridviewProperty("gridReconSales", "AllowFilter", True)
+Gui.F_SalesAnal.gsgcReconSales.SetGridviewProperty("gridReconSales", "OptionsViewColumnAutoWidth", False)
+Gui.F_SalesAnal.gsgcReconSales.SetGridviewProperty("gridReconSales", "OptionsFindAlwaysVisible", False)
+Gui.F_SalesAnal.gsgcReconSales.SetGridviewProperty("gridReconSales", "OptionsViewShowAutoFilterRow", False)
+
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "ENTRY_TYPE", "Visible", False)
+'Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "BATCH_NO", "Visible", False)
+'Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "GL_NUMBER", "Visible", False)
+'Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "TRANS_DATE", "Visible", False)
+
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "CUST_DESC", "Caption", "Customer/Description")
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "CUST_NO", "Caption", "Cust #")
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "SO_NO", "Caption", "SO")
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "INVOICE_NO", "Caption", "Invoice")
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "MONTH", "Caption", "Month")
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "PER_GL", "Caption", "Per GL")
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "PER_SALES", "Caption", "Per Sales COS Rpt")
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "DIFF", "Caption", "Diff")
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "DESCRIPTION", "Caption", "Description")
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "BATCH_NO", "Caption", "Batch No.")
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "GL_NUMBER", "Caption", "GL No.")
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "TRANS_DATE", "Caption", "Trans Date")
+
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "CUST_DESC", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "CUST_NO", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "SO_NO", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "INVOICE_NO", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "MONTH", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "PER_GL", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "PER_SALES", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "DIFF", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "DESCRIPTION", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "BATCH_NO", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "GL_NUMBER", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "TRANS_DATE", "HeaderFontBold", True)
+
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "CUST_DESC", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "CUST_NO", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "SO_NO", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "INVOICE_NO", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "MONTH", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "PER_GL", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "PER_SALES", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "DIFF", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "DESCRIPTION", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "BATCH_NO", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "GL_NUMBER", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "TRANS_DATE", "MinWidth", 50)
+
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "CUST_DESC", "Width", 150)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "CUST_NO", "Width", 150)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "SO_NO", "Width", 150)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "INVOICE_NO", "Width", 150)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "MONTH", "Width", 150)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "PER_GL", "Width", 150)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "PER_SALES", "Width", 150)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "DIFF", "Width", 150)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "DESCRIPTION", "Width", 150)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "BATCH_NO", "Width", 150)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "GL_NUMBER", "Width", 150)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "TRANS_DATE", "Width", 150)
+
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "CUST_DESC", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "CUST_NO", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "SO_NO", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "INVOICE_NO", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "MONTH", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "PER_GL", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "PER_SALES", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "DIFF", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "DESCRIPTION", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "BATCH_NO", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "GL_NUMBER", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "TRANS_DATE", "ReadOnly", True)
+
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "CUST_DESC", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "CUST_NO", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "SO_NO", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "INVOICE_NO", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "MONTH", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "PER_GL", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "PER_SALES", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "DIFF", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "DESCRIPTION", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "BATCH_NO", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "GL_NUMBER", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "TRANS_DATE", "AllowEdit", False)
+
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "CUST_DESC", "VisibleIndex", 1)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "CUST_NO", "VisibleIndex", 2)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "SO_NO", "VisibleIndex", 3)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "INVOICE_NO", "VisibleIndex", 4)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "MONTH", "VisibleIndex", 5)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "PER_GL", "VisibleIndex", 6)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "PER_SALES", "VisibleIndex", 7)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "DIFF", "VisibleIndex", 8)
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "DESCRIPTION", "VisibleIndex", 9)
+
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "PER_GL", "DisplayCustomNumeric", "#,###,###,##0.0000")
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "PER_SALES", "DisplayCustomNumeric", "#,###,###,##0.0000")
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "DIFF", "DisplayCustomNumeric", "#,###,###,##0.0000")
+
+Gui.F_SalesAnal.gsgcReconSales.SetColumnProperty("gridReconSales", "TRANS_DATE", "DisplayCustomDatetime", "d")
+
+Gui.F_SalesAnal.gsgcReconSales.MainView("gridReconSales")
+
+Gui.F_SalesAnal.gsgcReconDebts.AddGridviewFromDataview("gridReconDebts", "dtDispRecon", "dvReconDebts")
+
+Gui.F_SalesAnal.gsgcReconDebts.SetGridviewProperty("gridReconDebts", "MultiSelect", False)
+Gui.F_SalesAnal.gsgcReconDebts.SetGridviewProperty("gridReconDebts", "AllowSort", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetGridviewProperty("gridReconDebts", "AllowFilter", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetGridviewProperty("gridReconDebts", "OptionsViewColumnAutoWidth", False)
+Gui.F_SalesAnal.gsgcReconDebts.SetGridviewProperty("gridReconDebts", "OptionsFindAlwaysVisible", False)
+Gui.F_SalesAnal.gsgcReconDebts.SetGridviewProperty("gridReconDebts", "OptionsViewShowAutoFilterRow", False)
+
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "ENTRY_TYPE", "Visible", False)
+'Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "BATCH_NO", "Visible", False)
+'Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "GL_NUMBER", "Visible", False)
+'Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "TRANS_DATE", "Visible", False)
+
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "CUST_DESC", "Caption", "Customer/Description")
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "CUST_NO", "Caption", "Cust #")
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "SO_NO", "Caption", "SO")
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "INVOICE_NO", "Caption", "Invoice")
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "MONTH", "Caption", "Month")
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "PER_GL", "Caption", "Per GL")
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "PER_SALES", "Caption", "Per Sales Jrnl")
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "DIFF", "Caption", "Diff")
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "DESCRIPTION", "Caption", "Description")
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "BATCH_NO", "Caption", "Batch No")
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "GL_NUMBER", "Caption", "GL No")
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "TRANS_DATE", "Caption", "Trans Date")
+
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "CUST_DESC", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "CUST_NO", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "SO_NO", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "INVOICE_NO", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "MONTH", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "PER_GL", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "PER_SALES", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "DIFF", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "DESCRIPTION", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "BATCH_NO", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "GL_NUMBER", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "TRANS_DATE", "HeaderFontBold", True)
+
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "CUST_DESC", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "CUST_NO", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "SO_NO", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "INVOICE_NO", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "MONTH", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "PER_GL", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "PER_SALES", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "DIFF", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "DESCRIPTION", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "BATCH_NO", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "GL_NUMBER", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "TRANS_DATE", "MinWidth", 50)
+
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "CUST_DESC", "Width", 150)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "CUST_NO", "Width", 150)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "SO_NO", "Width", 150)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "INVOICE_NO", "Width", 150)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "MONTH", "Width", 150)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "PER_GL", "Width", 150)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "PER_SALES", "Width", 150)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "DIFF", "Width", 150)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "DESCRIPTION", "Width", 150)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "BATCH_NO", "Width", 150)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "GL_NUMBER", "Width", 150)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "TRANS_DATE", "Width", 150)
+
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "CUST_DESC", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "CUST_NO", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "SO_NO", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "INVOICE_NO", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "MONTH", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "PER_GL", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "PER_SALES", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "DIFF", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "DESCRIPTION", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "BATCH_NO", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "GL_NUMBER", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "TRANS_DATE", "ReadOnly", True)
+
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "CUST_DESC", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "CUST_NO", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "SO_NO", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "INVOICE_NO", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "MONTH", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "PER_GL", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "PER_SALES", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "DIFF", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "DESCRIPTION", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "BATCH_NO", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "GL_NUMBER", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "TRANS_DATE", "AllowEdit", False)
+
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "CUST_DESC", "VisibleIndex", 1)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "CUST_NO", "VisibleIndex", 2)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "SO_NO", "VisibleIndex", 3)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "INVOICE_NO", "VisibleIndex", 4)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "MONTH", "VisibleIndex", 5)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "PER_GL", "VisibleIndex", 6)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "PER_SALES", "VisibleIndex", 7)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "DIFF", "VisibleIndex", 8)
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "DESCRIPTION", "VisibleIndex", 9)
+
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "PER_GL", "DisplayCustomNumeric", "#,###,###,##0.0000")
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "PER_SALES", "DisplayCustomNumeric", "#,###,###,##0.0000")
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts", "DIFF", "DisplayCustomNumeric", "#,###,###,##0.0000")
+
+Gui.F_SalesAnal.gsgcReconDebts.SetColumnProperty("gridReconDebts","TRANS_DATE","DisplayCustomDatetime","d")
+
+Gui.F_SalesAnal.gsgcReconDebts.MainView("gridReconDebts")
+
+'-------------------------------------------------------------------------------------------------------------------------
+'The Accruals grids:
+Gui.F_SalesAnal.gsgcAccrSales.AddGridviewFromDataview("gridAccrSales", "dtDispAccruals", "dvAccrSales")
+
+Gui.F_SalesAnal.gsgcAccrSales.SetGridviewProperty("gridAccrSales", "MultiSelect", False)
+Gui.F_SalesAnal.gsgcAccrSales.SetGridviewProperty("gridAccrSales", "AllowSort", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetGridviewProperty("gridAccrSales", "AllowFilter", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetGridviewProperty("gridAccrSales", "OptionsViewColumnAutoWidth", False)
+Gui.F_SalesAnal.gsgcAccrSales.SetGridviewProperty("gridAccrSales", "OptionsFindAlwaysVisible", False)
+Gui.F_SalesAnal.gsgcAccrSales.SetGridviewProperty("gridAccrSales", "OptionsViewShowAutoFilterRow", False)
+
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "ENTRY_TYPE", "Visible", False)
+'Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "BATCH_NO", "Visible", False)
+'Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "GL_NUMBER", "Visible", False)
+'Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "TRANS_DATE", "Visible", False)
+
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "CUST_DESC", "Caption", "Customer/Description")
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "CUST_NO", "Caption", "Cust #")
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "SO_NO", "Caption", "SO")
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "INVOICE_NO", "Caption", "Invoice")
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "MONTH", "Caption", "Month")
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "PER_GL", "Caption", "Per GL")
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "PER_SALES", "Caption", "Per Sales COS Rpt")
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "DIFF", "Caption", "Diff")
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "DESCRIPTION", "Caption", "Description")
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "BATCH_NO", "Caption", "Batch No.")
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "GL_NUMBER", "Caption", "GL No.")
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "TRANS_DATE", "Caption", "Trans Date")
+
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "CUST_DESC", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "CUST_NO", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "SO_NO", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "INVOICE_NO", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "MONTH", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "PER_GL", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "PER_SALES", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "DIFF", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "DESCRIPTION", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "BATCH_NO", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "GL_NUMBER", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "TRANS_DATE", "HeaderFontBold", True)
+
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "CUST_DESC", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "CUST_NO", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "SO_NO", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "INVOICE_NO", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "MONTH", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "PER_GL", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "PER_SALES", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "DIFF", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "DESCRIPTION", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "BATCH_NO", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "GL_NUMBER", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "TRANS_DATE", "MinWidth", 50)
+
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "CUST_DESC", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "CUST_NO", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "SO_NO", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "INVOICE_NO", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "MONTH", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "PER_GL", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "PER_SALES", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "DIFF", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "DESCRIPTION", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "BATCH_NO", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "GL_NUMBER", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "TRANS_DATE", "Width", 150)
+
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "CUST_DESC", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "CUST_NO", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "SO_NO", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "INVOICE_NO", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "MONTH", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "PER_GL", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "PER_SALES", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "DIFF", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "DESCRIPTION", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "BATCH_NO", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "GL_NUMBER", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "TRANS_DATE", "ReadOnly", True)
+
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "CUST_DESC", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "CUST_NO", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "SO_NO", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "INVOICE_NO", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "MONTH", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "PER_GL", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "PER_SALES", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "DIFF", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "DESCRIPTION", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "BATCH_NO", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "GL_NUMBER", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "TRANS_DATE", "AllowEdit", False)
+
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "CUST_DESC", "VisibleIndex", 1)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "CUST_NO", "VisibleIndex", 2)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "SO_NO", "VisibleIndex", 3)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "INVOICE_NO", "VisibleIndex", 4)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "MONTH", "VisibleIndex", 5)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "PER_GL", "VisibleIndex", 6)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "PER_SALES", "VisibleIndex", 7)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "DIFF", "VisibleIndex", 8)
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "DESCRIPTION", "VisibleIndex", 9)
+
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "PER_GL", "DisplayCustomNumeric", "#,###,###,##0.0000")
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "PER_SALES", "DisplayCustomNumeric", "#,###,###,##0.0000")
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "DIFF", "DisplayCustomNumeric", "#,###,###,##0.0000")
+
+Gui.F_SalesAnal.gsgcAccrSales.SetColumnProperty("gridAccrSales", "TRANS_DATE", "DisplayCustomDatetime", "d")
+
+Gui.F_SalesAnal.gsgcAccrSales.MainView("gridAccrSales")
+
+Gui.F_SalesAnal.gsgcAccrDebts.AddGridviewFromDataview("gridAccrDebts", "dtDispAccruals", "dvAccrDebts")
+
+Gui.F_SalesAnal.gsgcAccrDebts.SetGridviewProperty("gridAccrDebts", "MultiSelect", False)
+Gui.F_SalesAnal.gsgcAccrDebts.SetGridviewProperty("gridAccrDebts", "AllowSort", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetGridviewProperty("gridAccrDebts", "AllowFilter", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetGridviewProperty("gridAccrDebts", "OptionsViewColumnAutoWidth", False)
+Gui.F_SalesAnal.gsgcAccrDebts.SetGridviewProperty("gridAccrDebts", "OptionsFindAlwaysVisible", False)
+Gui.F_SalesAnal.gsgcAccrDebts.SetGridviewProperty("gridAccrDebts", "OptionsViewShowAutoFilterRow", False)
+
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "ENTRY_TYPE", "Visible", False)
+'Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "BATCH_NO", "Visible", False)
+'Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "GL_NUMBER", "Visible", False)
+'Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "TRANS_DATE", "Visible", False)
+
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "CUST_DESC", "Caption", "Customer/Description")
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "CUST_NO", "Caption", "Cust #")
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "SO_NO", "Caption", "SO")
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "INVOICE_NO", "Caption", "Invoice")
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "MONTH", "Caption", "Month")
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "PER_GL", "Caption", "Per GL")
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "PER_SALES", "Caption", "Per Sales Jrnl")
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "DIFF", "Caption", "Diff")
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "DESCRIPTION", "Caption", "Description")
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "BATCH_NO", "Caption", "Batch No")
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "GL_NUMBER", "Caption", "GL No")
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "TRANS_DATE", "Caption", "Trans Date")
+
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "CUST_DESC", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "CUST_NO", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "SO_NO", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "INVOICE_NO", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "MONTH", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "PER_GL", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "PER_SALES", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "DIFF", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "DESCRIPTION", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "BATCH_NO", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "GL_NUMBER", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "TRANS_DATE", "HeaderFontBold", True)
+
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "CUST_DESC", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "CUST_NO", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "SO_NO", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "INVOICE_NO", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "MONTH", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "PER_GL", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "PER_SALES", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "DIFF", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "DESCRIPTION", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "BATCH_NO", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "GL_NUMBER", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "TRANS_DATE", "MinWidth", 50)
+
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "CUST_DESC", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "CUST_NO", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "SO_NO", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "INVOICE_NO", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "MONTH", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "PER_GL", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "PER_SALES", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "DIFF", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "DESCRIPTION", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "BATCH_NO", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "GL_NUMBER", "Width", 150)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "TRANS_DATE", "Width", 150)
+
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "CUST_DESC", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "CUST_NO", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "SO_NO", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "INVOICE_NO", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "MONTH", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "PER_GL", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "PER_SALES", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "DIFF", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "DESCRIPTION", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "BATCH_NO", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "GL_NUMBER", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "TRANS_DATE", "ReadOnly", True)
+
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "CUST_DESC", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "CUST_NO", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "SO_NO", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "INVOICE_NO", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "MONTH", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "PER_GL", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "PER_SALES", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "DIFF", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "DESCRIPTION", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "BATCH_NO", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "GL_NUMBER", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "TRANS_DATE", "AllowEdit", False)
+
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "CUST_DESC", "VisibleIndex", 1)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "CUST_NO", "VisibleIndex", 2)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "SO_NO", "VisibleIndex", 3)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "INVOICE_NO", "VisibleIndex", 4)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "MONTH", "VisibleIndex", 5)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "PER_GL", "VisibleIndex", 6)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "PER_SALES", "VisibleIndex", 7)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "DIFF", "VisibleIndex", 8)
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "DESCRIPTION", "VisibleIndex", 9)
+
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "PER_GL", "DisplayCustomNumeric", "#,###,###,##0.0000")
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "PER_SALES", "DisplayCustomNumeric", "#,###,###,##0.0000")
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "DIFF", "DisplayCustomNumeric", "#,###,###,##0.0000")
+
+Gui.F_SalesAnal.gsgcAccrDebts.SetColumnProperty("gridAccrDebts", "TRANS_DATE", "DisplayCustomDatetime", "d")
+
+Gui.F_SalesAnal.gsgcAccrDebts.MainView("gridAccrDebts")
+
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Gui.F_SalesAnal.gsgcTotals.AddGridviewFromDatatable("gridTotals", "dtTotals")
+
+Gui.F_SalesAnal.gsgcTotals.SetGridviewProperty("gridTotals", "MultiSelect", False)
+Gui.F_SalesAnal.gsgcTotals.SetGridviewProperty("gridTotals", "AllowSort", False)
+Gui.F_SalesAnal.gsgcTotals.SetGridviewProperty("gridTotals", "AllowFilter", False)
+Gui.F_SalesAnal.gsgcTotals.SetGridviewProperty("gridTotals", "OptionsViewColumnAutoWidth", False)
+Gui.F_SalesAnal.gsgcTotals.SetGridviewProperty("gridTotals", "OptionsFindAlwaysVisible", False)
+Gui.F_SalesAnal.gsgcTotals.SetGridviewProperty("gridTotals", "OptionsViewShowAutoFilterRow", False)
+
+Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "CAPTIONS", "Caption", "-")
+Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "SA_TOTALS", "Caption", "Sales")
+Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "DB_TOTALS", "Caption", "Total Cost")
+
+Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "CAPTIONS", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "SA_TOTALS", "HeaderFontBold", True)
+Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "DB_TOTALS", "HeaderFontBold", True)
+
+Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "CAPTIONS", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "SA_TOTALS", "MinWidth", 50)
+Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "DB_TOTALS", "MinWidth", 50)
+
+Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "CAPTIONS", "Width", 250)
+Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "SA_TOTALS", "Width", 250)
+Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "DB_TOTALS", "Width", 250)
+
+Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "CAPTIONS", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "SA_TOTALS", "ReadOnly", True)
+Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "DB_TOTALS", "ReadOnly", True)
+
+Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "CAPTIONS", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "SA_TOTALS", "AllowEdit", False)
+Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "DB_TOTALS", "AllowEdit", False)
+
+'Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "CAPTIONS", "VisibleIndex", 1)
+'Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "SA_TOTALS", "VisibleIndex", 2)
+'Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "DB_TOTALS", "VisibleIndex", 3)
+
+Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "SA_TOTALS", "DisplayCustomNumeric", "#,###,###,##0.0000")
+Gui.F_SalesAnal.gsgcTotals.SetColumnProperty("gridTotals", "DB_TOTALS", "DisplayCustomNumeric", "#,###,###,##0.0000")
+
+Gui.F_SalesAnal.gsgcTotals.MainView("gridTotals")
+
+F.Intrinsic.Control.Catch
+F.Intrinsic.Control.CallSub(Error, "Subroutine", V.Ambient.CurrentSubroutine, "ErrorDesc", V.Ambient.ErrorDescription, "ErrorNo", V.Ambient.ErrorNumber)
+F.Intrinsic.Control.EndTry
+Program.Sub.GridProperties.End
+
+Program.Sub.Serialize.Start
+F.Intrinsic.Control.Try
+V.Local.sSerialize.Declare(String, "")
+
+'At the end of the process. Save the current format of the grid
+Gui.F_SalesAnal.gsgcSalesAnal.Serialize("gridRecon", V.Local.sSerialize)
+F.Global.Registry.AddValue(V.Caller.User, V.Caller.CompanyCode, "gridRecon", 6236, 1000, False, "Serialize", False, 0, -999.0, 1/1/1980, 12:00:00 AM, V.Local.sSerialize)
+
+F.Intrinsic.Control.Catch
+F.Intrinsic.Control.CallSub(Error, "Subroutine", V.Ambient.CurrentSubroutine, "ErrorDesc", V.Ambient.ErrorDescription, "ErrorNo", V.Ambient.ErrorNumber)
+F.Intrinsic.Control.EndTry
+Program.Sub.Serialize.End
+
+Program.Sub.Deserialize.Start
+F.Intrinsic.Control.Try
+V.Local.sSerialize.Declare(String, "")
+
+'Extract the format of the grid per user
+F.Global.Registry.ReadValue(v.Caller.User, v.Caller.CompanyCode, "gridRecon", 6236, 1000, 6, "", v.Local.sSerialize)
+
+F.Intrinsic.Control.If(V.Local.sSerialize, <>, "")
+	Gui.F_SalesAnal.gsgcSalesAnal.Deserialize(V.Local.sSerialize)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.Catch
+F.Intrinsic.Control.CallSub(Error, "Subroutine", V.Ambient.CurrentSubroutine, "ErrorDesc", V.Ambient.ErrorDescription, "ErrorNo", V.Ambient.ErrorNumber)
+F.Intrinsic.Control.EndTry
+Program.Sub.Deserialize.End
+
+Program.Sub.LCTJCalculation.Start
+'F.Intrinsic.Control.Try
+'V.Local.sFilter.Declare(String, "")
+'V.Local.sLinePad.Declare(String, "")
+'V.Local.fLCTJ.Declare(Float, 0.0000)
+'V.Local.iLastAttempt.Declare(Long, 0)
+'V.Local.iLoop.Declare(Long, 0)
+
+''We will be building a dictionary that will calculate the Late cost to job per sales order. The main issue is that some jobs are for assembly parts, so we need to use the main parent WO to determine what SO Line it belongs to:
+
+''The key to the dictionary should be Sales order line, and the value associated with teh key will be the sum of all LCTJ amounts for all jobs associated with the parent WO for that SO line
+
+''This tells us the LCTJ associated with every job:
+'F.Data.Dictionary.CreateFromSQL("dicWOLC", "conx", "Select  JOB + '-' + SUFFIX as JOSU, sum(AMOUNT_LABOR + AMT_OVERHEAD + AMT_STANDARD) AS LCTJ FROM V_JOB_DETAIL WHERE LMO = 'Z' AND DESCRIPTION = 'LATE COSTS TO JOBS' group by JOB, SUFFIX order by LCTJ DESC")
+'F.Data.Dictionary.SetDefaultReturn("dicWOLC", "0.0000")
+
+''We get the Sales order information from the Job_header table
+'F.Data.DataTable.CreateFromSQL("dtJobs", "conx", "Select JOB, SUFFIX, PARENT_WO, PARENT_SUFFIX_PARENT, RTRIM(LTRIM(SALES_ORDER)) as SALES_ORDER, SALES_ORDER_LINE from V_JOB_HEADER", True)
+
+'F.Data.DataTable.AddExpressionColumn("dtJobs", "ORG_JOBSUFF", "String", "[JOB] + '-' + [SUFFIX]")
+'F.Data.DataTable.AddExpressionColumn("dtJobs", "PAR_JOBSUFF", "String", "[PARENT_WO] + '-' + [PARENT_SUFFIX_PARENT]")
+
+''First fill the value of LCTJ per job
+'F.Data.DataTable.AddColumn("dtJobs", "LCTJ_JOB", "Float")
+'F.Data.DataTable.FillFromDictionary("dtJobs", "dicWOLC", "ORG_JOBSUFF", "LCTJ_JOB")
+
+'F.Data.Dictionary.Close("dicWOLC")
+
+''Now we need to find the sales order number for all JOBS that are sales-order-less. Due to the fact that there are multiple layers of parents, this will be recursive..
+'F.Data.DataView.Create("dtJobs", "dvFiller", 22, "[SALES_ORDER] = '0000000'", "")
+'F.Data.DataView.SetValue("dtJobs", "dvFiller", -1, "SALES_ORDER", "")
+'F.Data.DataView.Close("dtJobs", "dvFiller")
+
+'F.Data.DataTable.AddColumn("dtJobs", "NEW_SO", "String")
+'F.Data.DataTable.AddColumn("dtJobs", "NEW_SOLN", "String")
+'F.Data.DataTable.AddExpressionColumn("dtJobs", "COMBO_SO", "String", "IIF([SALES_ORDER] <> '', [SALES_ORDER], [NEW_SO])")
+'F.Data.DataTable.AddExpressionColumn("dtJobs", "COMBO_LN", "String", "IIF([SALES_ORDER] <> '', [SALES_ORDER_LINE], [NEW_SOLN])")
+
+'F.Data.DataView.Create("dtJobs", "dvLost", 22, "[SALES_ORDER] = ''", "")
+''F.Data.DataView.ToDataTable("dtJobs", "dvLost", "dtNOSO")
+
+''The process below needs to run until the current number of lines without a sales order is the same as the previous iteration
+'F.Intrinsic.Control.DoUntil(V.Local.iLastAttempt, =, V.DataView.dtJobs!dvLost.RowCount)
+'	V.Local.iLastAttempt.Set(V.DataView.dtJobs!dvLost.RowCount)
+'	
+'	'The idea is that we are going to be creating a dictionary for WO to SO using the actual work order, then filling the same table again with that data but using the parent WO information as the key to fill
+'	F.Data.DataView.Create("dtJobs", "dvWSOLN", 22, "[SALES_ORDER] <> ''", "")
+'	
+'	'Dictionary for the SO
+'	F.Data.Dictionary.CreateFromDataView("dicSO", "dtJobs", "dvWSOLN", "ORG_JOBSUFF", "SALES_ORDER")
+'	F.Data.Dictionary.SetDefaultReturn("dicSO", "")
+'	
+'	'Dictionary for the SO Line
+'	F.Data.Dictionary.CreateFromDataView("dicSOLN", "dtJobs", "dvWSOLN", "ORG_JOBSUFF", "SALES_ORDER_LINE")
+'	F.Data.Dictionary.SetDefaultReturn("dicSOLN", "")
+'	
+'	'Now we go back and fill the NEW columns using the parent as teh key
+'	F.Data.DataTable.FillFromDictionary("dtJobs", "dicSO", "PAR_JOBSUFF", "NEW_SO")
+'	F.Data.DataTable.FillFromDictionary("dtJobs", "dicSOLN", "PAR_JOBSUFF", "NEW_SOLN")
+'	
+'	'Since the COMBO columns are expression columns, they should automatically get updated with both the original sales order or the sales order of the parent. 
+'	'We can then create a dictionary to fill the sales order in the original position, and then repeat the process..
+'	
+'	F.Data.Dictionary.CreateFromDataTable("dicFullSO", "dtJobs", "ORG_JOBSUFF", "COMBO_SO")
+'	F.Data.Dictionary.SetDefaultReturn("dicFullSO", "")
+'	
+'	F.Data.Dictionary.CreateFromDataTable("dicFullSOLN", "dtJobs", "ORG_JOBSUFF", "COMBO_LN")
+'	F.Data.Dictionary.SetDefaultReturn("dicFullSOLN", "")
+'	
+'	F.Data.DataTable.FillFromDictionary("dtJobs", "dicFullSO", "ORG_JOBSUFF", "SALES_ORDER")
+'	F.Data.DataTable.FillFromDictionary("dtJobs", "dicFullSOLN", "ORG_JOBSUFF", "SALES_ORDER_LINE")
+'	
+'	F.Data.Dictionary.Close("dicFullSOLN")
+'	F.Data.Dictionary.Close("dicFullSO")
+'	F.Data.Dictionary.Close("dicSOLN")
+'	F.Data.Dictionary.Close("dicSO")
+'	
+'	F.Data.DataView.Close("dtJobs", "dvWSOLN")
+'	
+'	'This last update of the Sales Order will automatically update the dataview and if the number of rows has not changed, then we can resume the project
+'F.Intrinsic.Control.Loop
+
+'F.Data.DataView.Close("dtJobs", "dvLost")
+
+''It is at this point that we need to build the dictionary based off teh Sales Order, and this one may be tricky since we have to essentially loop through all unique Sales Orders..
+'F.Data.DataView.Create("dtJobs", "dv4SO", 22, "[SALES_ORDER] <> ''", "")
+'F.Data.DataView.ToDataTableDistinct("dtJobs", "dv4SO", "dtSOLCTJ", "SALES_ORDER*!*SALES_ORDER_LINE", True)
+'F.Data.DataView.Close("dtJobs", "dv4SO")
+
+'F.Data.DataTable.AddColumn("dtSOLCTJ", "LCTJ", "Float")
+
+'F.Intrinsic.Control.For(V.Local.iLoop, 0, V.DataTable.dtSOLCTJ.RowCount--, 1)
+'	'We create the filter using the sales order and sales order line
+'	F.Intrinsic.String.Build("SALES_ORDER = '{0}' and SALES_ORDER_LINE = '{1}'", V.DataTable.dtSOLCTJ(V.Local.iLoop).SALES_ORDER!FieldValTrim, V.DataTable.dtSOLCTJ(V.Local.iLoop).SALES_ORDER_LINE!FieldValTrim, V.Local.sFilter)
+'	
+'	F.Data.DataTable.Compute("dtJobs", "SUM(LCTJ_JOB)", V.Local.sFilter, V.Local.fLCTJ)
+'	
+'	F.Intrinsic.String.RPad(V.DataTable.dtSOLCTJ(V.Local.iLoop).SALES_ORDER_LINE!FieldValTrim, "0", 4, V.Local.sLinePad)
+'	
+'	F.Data.DataTable.SetValue("dtSOLCTJ", V.Local.iLoop, "LCTJ", V.Local.fLCTJ, "SALES_ORDER_LINE", V.Local.sLinePad)
+'	
+'F.Intrinsic.Control.Next(V.Local.iLoop)
+
+''Now from here, we can create the dictionary that will return the Late cost to job value when given a Sales Order
+'F.Data.DataTable.AddExpressionColumn("dtSOLCTJ", "SOLN_KEY", "String", "[SALES_ORDER] + '-' + [SALES_ORDER_LINE]")
+
+'F.Data.Dictionary.CreateFromDataTable("dicLCTJSO", "dtSOLCTJ", "SOLN_KEY", "LCTJ")
+'F.Data.Dictionary.SetDefaultReturn("dicLCTJSO", "0.0000")
+
+'F.Data.DataTable.Close("dtSOLCTJ")
+'F.Data.DataTable.Close("dtJobs")
+
+'F.Intrinsic.Control.Catch
+'F.Intrinsic.Control.CallSub(Error, "Subroutine", V.Ambient.CurrentSubroutine, "ErrorDesc", V.Ambient.ErrorDescription, "ErrorNo", V.Ambient.ErrorNumber)
+'F.Intrinsic.Control.EndTry
+Program.Sub.LCTJCalculation.End
+
+Program.Sub.SalesAnalysisPopulation.Start
+F.Intrinsic.Control.Try
+V.Local.sSql.Declare(String, "")
+V.Local.sDateRange.Declare(String, "")
+V.Local.dFrom.Declare(Date, "01/01/1900")
+V.Local.dTo.Declare(Date, "01/01/1900")
+
+V.Local.dFrom.Set(V.Screen.F_SalesAnal!dtpFrom.Value)
+V.Local.dTo.Set(V.Screen.F_SalesAnal!dtpTo.Value)
+
+'We want to make sure the grid is cleared
+
+'The data will consist of two different pieces: The first piece loads data as instructed from a custom report that they use, the second pulls late cost to job information from a given query:
+
+'The data will be pulled depending on the date they selected. For the Sales Analysis grid specifically, the date field we use will depend on the checkbox they have selected.
+
+F.Intrinsic.Control.If(V.Screen.F_SalesAnal!chkPost.Value, "=", "1")
+	'Original request
+	F.Intrinsic.String.Build("Select INVOICE_NO, ORDER_NO, ORDER_SUFFIX, DATE_INVOICE as CUSTOM_DATE from V_INVOICE_DATETIME where CUSTOM_DATE between '{0}' and '{1}'", V.Local.dFrom.PervasiveDate, V.Local.dTo.PervasiveDate, V.Local.sSql)
+	
+	F.Data.DataTable.CreateFromSQL("dtOrders", "conx", V.Local.sSQL, True)
+	F.Data.DataTable.AddExpressionColumn("dtOrders", "Key_field", "String", "[ORDER_NO] + '-' + [ORDER_SUFFIX]")
+	
+	F.Data.Dictionary.CreateFromDataTable("dicOrds", "dtOrders", "Key_field", "ORDER_NO")
+	F.Data.Dictionary.SetDefaultReturn("dicOrds", "")
+	
+	F.Data.DataTable.CreateFromSQL("dtAll", "conx", "Select SALESPERSON, INVOICE, CUSTOMER, RTRIM(LTRIM(ORDER_NO)) as ORDER_NO, ORDER_SUFFIX, ORDER_LINE, LINE_TYPE, PART, PRODUCT_LINE, QTY_SHIPPED, COST, PRICE, DATE_INVOICE, DESCRIPTION from V_ORDER_HIST_LINE where LINE_TYPE <> 'P'", True)
+	
+	F.Data.DataTable.AddExpressionColumn("dtAll", "Key_field", "String", "[ORDER_NO] + '-' + [ORDER_SUFFIX]")
+	F.Data.DataTable.AddExpressionColumn("dtAll", "Key_SOLN", "String", "[ORDER_NO] + '-' + [ORDER_LINE]")
+	
+	F.Data.DataTable.AddColumn("dtAll", "Validation", "String")
+	
+	F.Data.DataTable.FillFromDictionary("dtAll", "dicOrds", "Key_field", "Validation")
+	F.Data.Dictionary.Close("dicOrds")
+	
+	F.Data.DataView.Create("dtAll", "dvFiltered", 22, "Validation <> ''", "")
+	
+F.Intrinsic.Control.Else
+	'Change in date field
+	F.Data.DataTable.CreateFromSQL("dtOrders", "conx", "Select INVOICE_NO, ORDER_NO, ORDER_SUFFIX, DATE_INVOICE as CUSTOM_DATE from V_INVOICE_DATETIME", True)
+	F.Data.DataTable.AddExpressionColumn("dtOrders", "Key_field", "String", "[ORDER_NO] + '-' + [ORDER_SUFFIX]")
+		
+	F.Intrinsic.String.Build("Select SALESPERSON, INVOICE, CUSTOMER, RTRIM(LTRIM(ORDER_NO)) as ORDER_NO, ORDER_SUFFIX, ORDER_LINE, LINE_TYPE, PART, PRODUCT_LINE, QTY_SHIPPED, COST, PRICE, DATE_INVOICE, DESCRIPTION from V_ORDER_HIST_LINE where LINE_TYPE <> 'P' and DATE_INVOICE between '{0}' and '{1}'", V.Local.dFrom.PervasiveDate, V.Local.dTo.PervasiveDate, V.Local.sSql)
+	
+	F.Data.DataTable.CreateFromSQL("dtAll", "conx", V.Local.sSql, True)
+	
+	F.Data.Dictionary.CreateFromDataTable("dicOrds", "dtOrders", "Key_field", "ORDER_NO")
+	F.Data.Dictionary.SetDefaultReturn("dicOrds", "")
+	
+	
+	F.Data.DataTable.AddExpressionColumn("dtAll", "Key_field", "String", "[ORDER_NO] + '-' + [ORDER_SUFFIX]")
+	F.Data.DataTable.AddExpressionColumn("dtAll", "Key_SOLN", "String", "[ORDER_NO] + '-' + [ORDER_LINE]")
+	
+	F.Data.DataTable.AddColumn("dtAll", "Validation", "String")
+	
+	F.Data.DataTable.FillFromDictionary("dtAll", "dicOrds", "Key_field", "Validation")
+	F.Data.Dictionary.Close("dicOrds")
+	
+	F.Data.DataView.Create("dtAll", "dvFiltered", 22, "Validation <> ''", "")
+	
+F.Intrinsic.Control.EndIf
+
+F.Data.DataView.ToDataTable("dtAll", "dvFiltered", "dtDisplay", True)
+
+F.Data.DataView.Close("dtAll", "dvFiltered")
+F.Data.DataTable.Close("dtAll")
+
+'Now we fill out the information into that dtDisplay table
+F.Data.Dictionary.CreateFromDataTable("dicCustDate", "dtOrders", "Key_field", "CUSTOM_DATE")
+F.Data.Dictionary.SetDefaultReturn("dicCustDate", "01/01/1900")
+F.Data.DataTable.AddColumn("dtDisplay", "CUSTOM_DATE", "Date")
+F.Data.DataTable.FillFromDictionary("dtDisplay", "dicCustDate", "Key_field", "CUSTOM_DATE")
+F.Data.Dictionary.Close("dicCustDate")
+
+F.Data.DataTable.CreateFromSQL("dtBlanky", "conx", "Select ORDER_NO, BLANKET_NO from V_ORDER_HEADER where BLANKET_NO <> ''")
+
+F.Data.DataTable.CreateFromSQL("dtBlankyH", "conx", "Select ORDER_NO, BLANKET_NO from V_ORDER_HIST_HEAD where BLANKET_NO <> ''")
+
+F.Data.DataTable.Merge("dtBlankyH", "dtBlanky", True, 1)
+
+F.Data.DataView.Create("dtBlanky", "dvClear", 22, "[BLANKET_NO] = '0000000'", "")
+F.Intrinsic.Control.If(V.DataView.dtBlanky!dvClear.RowCount, >, 0)
+	F.Data.DataView.SetValue("dtBlanky", "dvClear", -1, "BLANKET_NO", "")
+F.Intrinsic.Control.EndIf
+F.Data.DataView.Close("dtBlanky", "dvClear")
+
+F.Data.Dictionary.CreateFromDataTable("dicBlanky", "dtBlanky", "ORDER_NO", "BLANKET_NO")
+F.Data.Dictionary.SetDefaultReturn("dicBlanky", "")
+F.Data.DataTable.AddColumn("dtDisplay", "BLANKET_NO_H", "String")
+F.Data.DataTable.FillFromDictionary("dtDisplay", "dicBlanky", "ORDER_NO", "BLANKET_NO_H")
+F.Data.Dictionary.Close("dicBlanky")
+
+F.Data.DataTable.Close("dtBlanky")
+F.Data.DataTable.Close("dtBlankyH")
+
+'Now we get the information from the late cost query:
+'We get the rest of the columns through expression columns:
+
+F.Intrinsic.UI.ChangeWaitStatus("Performing LCTJ Calculations")
+
+F.Data.DataTable.AddColumn("dtDisplay", "LCTJ", "Float", "0.0000")
+F.Data.DataTable.AddColumn("dtDisplay", "JOB_SUFFIX", "String", "")
+
+'F.Intrinsic.Control.CallSub(LCTJCalculation)
+'F.Intrinsic.Control.CallSub(LCTJforDate)
+F.Intrinsic.Control.CallSub(GuidedLCTJ)
+
+F.Data.Dictionary.CreateFromSQL("dicCust", "conx", "Select CUSTOMER, RTRIM(LTRIM(NAME_CUSTOMER)) from V_CUSTOMER_MASTER")
+F.Data.Dictionary.SetDefaultReturn("dicCust", "")
+F.Data.DataTable.AddColumn("dtDisplay", "NAME_CUSTOMER", "String")
+F.Data.DataTable.FillFromDictionary("dtDisplay", "dicCust", "CUSTOMER", "NAME_CUSTOMER")
+F.Data.Dictionary.Close("dicCust")
+
+'F.Data.DataTable.AddColumn("dtDisplay", "LCTJ", "Float")
+'F.Data.DataTable.FillFromDictionary("dtDisplay", "dicLCTJSO", "Key_SOLN", "LCTJ")
+
+'Extended price is the shipped qty * price
+F.Data.DataTable.AddExpressionColumn("dtDisplay", "EXT_PRICE", "Float", "[QTY_SHIPPED] * [PRICE]")
+
+'Extended cost is the shipped qty * cost
+F.Data.DataTable.AddExpressionColumn("dtDisplay", "EXT_COST", "Float", "[QTY_SHIPPED] * [COST]")
+
+'Total cost is the Extended cost + the LCTJ
+F.Data.DataTable.AddExpressionColumn("dtDisplay", "TOTAL_COST", "Float", "[EXT_COST] + [LCTJ]")
+
+'Profit is extended price - total cost
+F.Data.DataTable.AddExpressionColumn("dtDisplay", "PROFIT_LINE", "Float", "[EXT_PRICE] - [TOTAL_COST]")
+
+'Margin analysis is the Profit divided by the extended price
+F.Data.DataTable.AddExpressionColumn("dtDisplay", "MARGIN_LINE", "Float", "IIF([PROFIT_LINE] = 0, 0.0000,[PROFIT_LINE]/[PRICE])")
+
+'The project number value will be the value in the Mark Shipment field in the order header
+F.Data.DataTable.AddColumn("dtDisplay", "PROJECT_HEAD", "String")
+F.Data.DataTable.AddColumn("dtDisplay", "PROJECT_HIST", "String")
+
+F.Data.Dictionary.CreateFromSQL("dicMarkHed", "conx", "Select RTRIM(LTRIM(ORDER_NO)) as ORDER_NO, RTRIM(LTRIM(MARK_INFO)) as MARK_INFO from V_ORDER_HEADER")
+F.Data.Dictionary.SetDefaultReturn("dicMarkHed", "")
+
+F.Data.DataTable.FillFromDictionary("dtDisplay", "dicMarkHed", "ORDER_NO", "PROJECT_HEAD")
+
+F.Data.Dictionary.Close("dicMarkHed")
+
+F.Data.Dictionary.CreateFromSQL("dicMarkHist", "conx", "Select RTRIM(LTRIM(ORDER_NO)) as ORDER_NO, RTRIM(LTRIM(MARK_INFO)) as MARK_INFO from V_ORDER_HIST_HEAD")
+F.Data.Dictionary.SetDefaultReturn("dicMarkHist", "")
+
+F.Data.DataTable.FillFromDictionary("dtDisplay", "dicMarkHist", "ORDER_NO", "PROJECT_HIST")
+
+F.Data.Dictionary.Close("dicMarkHist")
+
+F.Data.DataTable.AddExpressionColumn("dtDisplay", "PROJECT_NO", "String", "IIF([PROJECT_HIST] = '', [PROJECT_HEAD], [PROJECT_HIST])")
+
+'Project number is going to be getting pulled from the Order header information. Most likely the V_ORDER_HIST_HEAD table?.  V_ORDER_HEADER
+
+F.Data.DataTable.AddColumn("dtDisplay", "ADDL_COST", "Float")
+F.Data.DataTable.AddExpressionColumn("dtDisplay", "FINAL_COST", "Float", "TOTAL_COST")
+F.Data.DataTable.AddExpressionColumn("dtDisplay", "ORDER_NO_ANAL", "String", "IIF([BLANKET_NO_H] <> '', [BLANKET_NO_H], [ORDER_NO])")
+
+F.Data.DataTable.Close("dtOrders")
+
+F.Intrinsic.Control.Catch
+F.Intrinsic.Control.CallSub(Error, "Subroutine", V.Ambient.CurrentSubroutine, "ErrorDesc", V.Ambient.ErrorDescription, "ErrorNo", V.Ambient.ErrorNumber)
+F.Intrinsic.Control.EndTry
+Program.Sub.SalesAnalysisPopulation.End
+
+Program.Sub.SalesAccountsPopulation.Start
+F.Intrinsic.Control.Try
+V.Local.sSql.Declare(String, "")
+V.Local.sCredNo.Declare(String, "")
+V.Local.sDebtNo.Declare(String, "")
+V.Local.sCredDesc.Declare(String, "")
+V.Local.sDebtDesc.Declare(String, "")
+V.Local.sFilter.Declare(String, "")
+V.Local.iLoop.Declare(Long, 0)
+V.Local.iMax.Declare(Long, 0)
+V.Local.fCred.Declare(Float, 0.00)
+V.Local.fDebt.Declare(Float, 0.00)
+V.Local.dFrom.Declare(Date, "01/01/1900")
+V.Local.dTo.Declare(Date, "01/01/1900")
+
+V.Local.dFrom.Set(V.Screen.F_SalesAnal!dtpFrom.Value)
+V.Local.dTo.Set(V.Screen.F_SalesAnal!dtpTo.Value)
+
+'We will be filling information in the second grid on the second tab in this subroutine.
+'We will be going into the GL_DETAIL table to get information that was posted during the date range selected
+F.Data.DataTable.CreateFromSQL("dtCredAccts", "conx", "Select distinct SALES_ACCOUNT from V_PRODUCT_LINE where SALES_ACCOUNT <> '' order by SALES_ACCOUNT ASC", True)
+
+'Requested by customer to have this accounts added:
+F.Data.DataView.Create("dtCredAccts", "dvCheck", 22, "[SALES_ACCOUNT] = '40040'", "")
+F.Intrinsic.Control.If(V.DataView.dtCredAccts!dvCheck.RowCount, =, 0)
+	F.Data.DataTable.AddRow("dtCredAccts", "SALES_ACCOUNT", "40040")
+F.Intrinsic.Control.EndIf
+F.Data.DataView.Close("dtCredAccts", "dvCheck")
+
+F.Data.DataView.Create("dtCredAccts", "dvCheck", 22, "[SALES_ACCOUNT] = '40090'", "")
+F.Intrinsic.Control.If(V.DataView.dtCredAccts!dvCheck.RowCount, =, 0)
+	F.Data.DataTable.AddRow("dtCredAccts", "SALES_ACCOUNT", "40090")
+F.Intrinsic.Control.EndIf
+F.Data.DataView.Close("dtCredAccts", "dvCheck")
+
+F.Data.DataView.Create("dtCredAccts", "dvCheck", 22, "[SALES_ACCOUNT] = '41000'", "")
+F.Intrinsic.Control.If(V.DataView.dtCredAccts!dvCheck.RowCount, =, 0)
+	F.Data.DataTable.AddRow("dtCredAccts", "SALES_ACCOUNT", "41000")
+F.Intrinsic.Control.EndIf
+F.Data.DataView.Close("dtCredAccts", "dvCheck")
+
+F.Data.DataTable.CreateFromSQL("dtDebtAccts", "conx", "Select distinct DEBIT_ACCOUNT from V_INV_GL_ACCTS where DEBIT_ACCOUNT <> '' and DEBIT_ACCOUNT <> '64800' and CODE_TRANSACTION in ('O35', 'C52') order by DEBIT_ACCOUNT ASC", True)
+
+F.Data.DataView.Create("dtDebtAccts", "dvCheck", 22, "[DEBIT_ACCOUNT] = '50040'", "")
+F.Intrinsic.Control.If(V.DataView.dtDebtAccts!dvCheck.RowCount, =, 0)
+	F.Data.DataTable.AddRow("dtDebtAccts", "DEBIT_ACCOUNT", "50040")
+F.Intrinsic.Control.EndIf
+F.Data.DataView.Close("dtDebtAccts", "dvCheck")
+
+F.Data.DataView.Create("dtDebtAccts", "dvCheck", 22, "[DEBIT_ACCOUNT] = '51060'", "")
+F.Intrinsic.Control.If(V.DataView.dtDebtAccts!dvCheck.RowCount, =, 0)
+	F.Data.DataTable.AddRow("dtDebtAccts", "DEBIT_ACCOUNT", "51060")
+F.Intrinsic.Control.EndIf
+F.Data.DataView.Close("dtDebtAccts", "dvCheck")
+
+F.Data.DataView.Create("dtDebtAccts", "dvCheck", 22, "[DEBIT_ACCOUNT] = '53070'", "")
+F.Intrinsic.Control.If(V.DataView.dtDebtAccts!dvCheck.RowCount, =, 0)
+	F.Data.DataTable.AddRow("dtDebtAccts", "DEBIT_ACCOUNT", "53070")
+F.Intrinsic.Control.EndIf
+F.Data.DataView.Close("dtDebtAccts", "dvCheck")
+
+'We are going to have to create a dataview to fix the filter since we added accounts after the data was pulled...
+F.Data.DataView.Create("dtCredAccts", "dvSorted", 22, "", "SALES_ACCOUNT ASC")
+F.Data.DataView.Create("dtDebtAccts", "dvSorted", 22, "", "DEBIT_ACCOUNT ASC")
+
+F.Intrinsic.Control.If(V.DataTable.dtCredAccts.RowCount--, >, V.DataTable.dtDebtAccts.RowCount--)
+	V.Local.iMax.Set(V.DataTable.dtCredAccts.RowCount--)
+F.Intrinsic.Control.Else
+	V.Local.iMax.Set(V.DataTable.dtDebtAccts.RowCount--)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.String.Build("Select RTRIM(LTRIM(GL_NUMBER)) as GL_NUMBER, SUM(AMOUNT_CMPNY) as TOTAL_SUM from V_GL_Detail where POST_DATE_SQL between '{0}' and '{1}' group by GL_NUMBER", V.Local.dFrom.PervasiveDate, V.Local.dTo.PervasiveDate, V.Local.sSql)
+
+F.Data.Dictionary.CreateFromSQL("dicSumAcct", "conx", V.Local.sSql)
+F.Data.Dictionary.SetDefaultReturn("dicSumAcct", "0.0000")
+
+F.Data.Dictionary.CreateFromSQL("dicGLMST", "conx", "Select RTRIM(LTRIM(GL_ACCOUNT)) as GL_ACCOUNT, RTRIM(LTRIM(DESCR)) as DESCR from V_GL_MASTER")
+F.Data.Dictionary.SetDefaultReturn("dicGLMST", "")
+
+'Ideally we are going to create as many rows as the 
+'The columns are the Sales Acct Desc, Sales Acct Number, Transactions Sum, COGS acct desc, Cogs acct number, Coggs transaction sum
+F.Data.DataTable.Create("dtDispPrime", True)
+F.Data.DataTable.AddColumn("dtDispPrime", "SA_DESC", "String")
+F.Data.DataTable.AddColumn("dtDispPrime", "SA_NO", "String")
+F.Data.DataTable.AddColumn("dtDispPrime", "SA_Trans", "Float")
+F.Data.DataTable.AddColumn("dtDispPrime", "DA_DESC", "String")
+F.Data.DataTable.AddColumn("dtDispPrime", "DA_NO", "String")
+F.Data.DataTable.AddColumn("dtDispPrime", "DA_Trans", "Float")
+
+F.Intrinsic.Control.For(V.Local.iLoop, 0, V.Local.iMax, 1)
+	'Verify the value we need to grab exists for both sets of things
+	F.Intrinsic.Control.If(V.Local.iLoop, "<=", V.DataView.dtCredAccts!dvSorted.RowCount--)
+		V.Local.sCredNo.Set(V.DataView.dtCredAccts!dvSorted(V.Local.iLoop).SALES_ACCOUNT!FieldValTrim)
+		V.Local.sCredDesc.Set(V.Dictionary.dicGLMST![V.Local.sCredNo.Trim])
+		V.Local.fCred.Set(V.Dictionary.dicSumAcct![V.Local.sCredNo.Trim])
+	F.Intrinsic.Control.Else
+		V.Local.sCredDesc.Set("")
+		V.Local.sCredNo.Set("")
+		V.Local.fCred.Set("0.0000")
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.If(V.Local.iLoop, "<=", V.DataView.dtDebtAccts!dvSorted.RowCount--)
+		V.Local.sDebtNo.Set(V.DataView.dtDebtAccts!dvSorted(V.Local.iLoop).DEBIT_ACCOUNT!FieldValTrim)
+		V.Local.sDebtDesc.Set(V.Dictionary.dicGLMST![V.Local.sDebtNo.Trim])
+		V.Local.fDebt.Set(V.Dictionary.dicSumAcct![V.Local.sDebtNo.Trim])
+	F.Intrinsic.Control.Else
+		V.Local.sDebtDesc.Set("")
+		V.Local.sDebtNo.Set("")
+		V.Local.fDebt.Set("0.0000")
+	F.Intrinsic.Control.EndIf
+	
+	F.Data.DataTable.AddRow("dtDispPrime", "SA_DESC", V.Local.sCredDesc, "SA_NO", V.Local.sCredNo, "SA_Trans", V.Local.fCred, "DA_DESC", V.Local.sDebtDesc, "DA_NO", V.Local.sDebtNo, "DA_Trans", V.Local.fDebt)
+	
+F.Intrinsic.Control.Next(V.Local.iLoop)
+
+'Create dictionaries for the credit and debit accounts, used for the other grids
+F.Data.Dictionary.CreateFromDataTable("dicCredAccts", "dtCredAccts", "SALES_ACCOUNT", "SALES_ACCOUNT")
+F.Data.Dictionary.SetDefaultReturn("dicCredAccts", "")
+
+F.Data.Dictionary.CreateFromDataTable("dicDebtAccts", "dtDebtAccts", "DEBIT_ACCOUNT", "DEBIT_ACCOUNT")
+F.Data.Dictionary.SetDefaultReturn("dicDebtAccts", "")
+
+F.Data.DataView.Close("dtCredAccts", "dvSorted")
+F.Data.DataView.Close("dtDebtAccts", "dvSorted")
+F.Data.DataTable.Close("dtCredAccts")
+F.Data.DataTable.Close("dtDebtAccts")
+F.Data.Dictionary.Close("dicGLMST")
+F.Data.Dictionary.Close("dicSumAcct")
+
+F.Intrinsic.Control.Catch
+F.Intrinsic.Control.CallSub(Error, "Subroutine", V.Ambient.CurrentSubroutine, "ErrorDesc", V.Ambient.ErrorDescription, "ErrorNo", V.Ambient.ErrorNumber)
+F.Intrinsic.Control.EndTry
+Program.Sub.SalesAccountsPopulation.End
+
+Program.Sub.SalesReconciliationPopulation.Start
+F.Intrinsic.Control.Try
+V.Local.sSql.Declare(String, "")
+V.Local.iLoop.Declare(Long, 0)
+V.Local.dFrom.Declare(Date, "01/01/1900")
+V.Local.dTo.Declare(Date, "01/01/1900")
+
+V.Local.dFrom.Set(V.Screen.F_SalesAnal!dtpFrom.Value)
+V.Local.dTo.Set(V.Screen.F_SalesAnal!dtpTo.Value)
+
+'We have four requirements when looking for reconciliation items:
+'We are looking for items that have a transaction code of ?J52? for parts with a product line of AP or AT.
+'We are looking for any items in the GL Inventory Details that have a customer of 'CUTCAN'.
+'We are looking for any items in the GL AP items that have a batch code that begins with anything except 'E'.
+'We are looking for any items in the GL AR items that have a batch code that begins with anything except 'S'.
+
+'These are further restricted by the account numbers that were pulled in to fill the GL Account info:
+
+'F.Intrinsic.String.Build("select GL_NUMBER, BATCH, LINE, SEQ, REFERENCE, DESCRIPTION, AMOUNT_CMPNY, TRAN_TYPE, TRANS_DATE_SQL  from V_GL_DETAIL where SUBSTRING(BATCH, 1,1) not in ('E', 'M') and TRANS_DATE_SQL between '{0}' and '{1}'", V.Local.dFrom.PervasiveDate, V.Local.dTo.PervasiveDate, V.Local.sSql)
+F.Intrinsic.String.Build("select GL_NUMBER, BATCH, LINE, SEQ, REFERENCE, DESCRIPTION, AMOUNT_CMPNY, TRAN_TYPE, TRANS_DATE_SQL  from V_GL_DETAIL where SUBSTRING(BATCH, 1,1) not in ('S') and TRANS_DATE_SQL between '{0}' and '{1}'", V.Local.dFrom.PervasiveDate, V.Local.dTo.PervasiveDate, V.Local.sSql)
+
+F.Data.DataTable.CreateFromSQL("dtReconSales", "conx", V.Local.sSql, True)
+F.Data.DataTable.AddColumn("dtReconSales", "ACCT_VERIFY", "String")
+F.Data.DataTable.FillFromDictionary("dtReconSales", "dicCredAccts", "GL_NUMBER", "ACCT_VERIFY")
+
+'F.Intrinsic.String.Build("select GL_NUMBER, BATCH, LINE, SEQ, REFERENCE, DESCRIPTION, AMOUNT_CMPNY, TRAN_TYPE, TRANS_DATE_SQL  from V_GL_DETAIL where SUBSTRING(BATCH, 1,1) not in ('S', 'M') and TRANS_DATE_SQL between '{0}' and '{1}'", V.Local.dFrom.PervasiveDate, V.Local.dTo.PervasiveDate, V.Local.sSql)
+'Bottom section
+F.Intrinsic.String.Build("select GL_NUMBER, BATCH, LINE, SEQ, REFERENCE, DESCRIPTION, AMOUNT_CMPNY, TRAN_TYPE, TRANS_DATE_SQL  from V_GL_DETAIL where SUBSTRING(BATCH, 1,1) not in ('E', 'M') and TRANS_DATE_SQL between '{0}' and '{1}'", V.Local.dFrom.PervasiveDate, V.Local.dTo.PervasiveDate, V.Local.sSql)
+
+F.Data.DataTable.CreateFromSQL("dtReconDebts", "conx", V.Local.sSql, True)
+F.Data.DataTable.AddColumn("dtReconDebts", "ACCT_VERIFY", "String")
+F.Data.DataTable.FillFromDictionary("dtReconDebts", "dicDebtAccts", "GL_NUMBER", "ACCT_VERIFY")
+
+F.Data.DataTable.Create("dtDispRecon", True)
+F.Data.DataTable.AddColumn("dtDispRecon", "CUST_DESC", "String")
+F.Data.DataTable.AddColumn("dtDispRecon", "CUST_NO", "String")
+F.Data.DataTable.AddColumn("dtDispRecon", "SO_NO", "String")
+F.Data.DataTable.AddColumn("dtDispRecon", "INVOICE_NO", "String")
+F.Data.DataTable.AddColumn("dtDispRecon", "MONTH", "String")
+F.Data.DataTable.AddColumn("dtDispRecon", "PER_GL", "Float")
+F.Data.DataTable.AddColumn("dtDispRecon", "PER_SALES", "Float")
+F.Data.DataTable.AddColumn("dtDispRecon", "DIFF", "Float")
+F.Data.DataTable.AddColumn("dtDispRecon", "DESCRIPTION", "String")
+F.Data.DataTable.AddColumn("dtDispRecon", "ENTRY_TYPE", "String")
+F.Data.DataTable.AddColumn("dtDispRecon", "BATCH_NO", "String")
+F.Data.DataTable.AddColumn("dtDispRecon", "GL_NUMBER", "String")
+F.Data.DataTable.AddColumn("dtDispRecon", "TRANS_DATE", "Date")
+
+'First we are going to add the lines for the sales, Entry type 'S'
+F.Data.DataView.Create("dtReconSales", "dvToDisplay", 22, "[ACCT_VERIFY] <> ''", "")
+F.Intrinsic.Control.For(V.Local.iLoop, 0, V.DataView.dtReconSales!dvToDisplay.RowCount--, 1)
+	'Extracting data from this table to add a line in the display table
+	F.Data.DataTable.AddRow("dtDispRecon", "CUST_DESC", "", "CUST_NO", "", "SO_NO", "", "INVOICE_NO", "", "MONTH", "", "PER_GL", V.DataView.dtReconSales!dvToDisplay(V.Local.iLoop).AMOUNT_CMPNY!FieldValFloat, "PER_SALES", "0.0000", "DIFF", V.DataView.dtReconSales!dvToDisplay(V.Local.iLoop).AMOUNT_CMPNY!FieldValFloat, "DESCRIPTION", V.DataView.dtReconSales!dvToDisplay(V.Local.iLoop).DESCRIPTION!FieldValTrim, "ENTRY_TYPE", "S", "BATCH_NO", V.DataView.dtReconSales!dvToDisplay(V.Local.iLoop).BATCH!FieldValTrim, "GL_NUMBER", V.DataView.dtReconSales!dvToDisplay(V.Local.iLoop).GL_NUMBER!FieldValTrim, "TRANS_DATE", V.DataView.dtReconSales!dvToDisplay(V.Local.iLoop).TRANS_DATE_SQL!FieldVal)
+F.Intrinsic.Control.Next(V.Local.iLoop)
+
+'Now add teh lines for the debts, Entry type 'D'
+F.Data.DataView.Create("dtReconDebts", "dvToDisplay", 22, "[ACCT_VERIFY] <> ''", "")
+F.Intrinsic.Control.For(V.Local.iLoop, 0, V.DataView.dtReconDebts!dvToDisplay.RowCount--, 1)
+	'Extracting data from this table to add a line in the display table
+	F.Data.DataTable.AddRow("dtDispRecon", "CUST_DESC", "", "CUST_NO", "", "SO_NO", "", "INVOICE_NO", "", "MONTH", "", "PER_GL", "0.0000", "PER_SALES", V.DataView.dtReconDebts!dvToDisplay(V.Local.iLoop).AMOUNT_CMPNY!FieldValFloat, "DIFF", V.DataView.dtReconDebts!dvToDisplay(V.Local.iLoop).AMOUNT_CMPNY!FieldValFloat, "DESCRIPTION", V.DataView.dtReconDebts!dvToDisplay(V.Local.iLoop).DESCRIPTION!FieldValTrim, "ENTRY_TYPE", "D", "BATCH_NO", V.DataView.dtReconDebts!dvToDisplay(V.Local.iLoop).BATCH!FieldValTrim, "GL_NUMBER", V.DataView.dtReconDebts!dvToDisplay(V.Local.iLoop).GL_NUMBER!FieldValTrim, "TRANS_DATE", V.DataView.dtReconDebts!dvToDisplay(V.Local.iLoop).TRANS_DATE_SQL!FieldVal)
+F.Intrinsic.Control.Next(V.Local.iLoop)
+
+'F.Data.DataView.Close("dtReconDebts", "dvToDisplay")
+'F.Data.DataView.Close("dtReconSales", "dvToDisplay")
+'F.Data.DataTable.Close("dtReconDebts")
+'F.Data.DataTable.Close("dtReconSales")
+
+F.Data.DataView.Create("dtDispRecon", "dvReconSales", 22, "[ENTRY_TYPE] = 'S'", "")
+F.Data.DataView.Create("dtDispRecon", "dvReconDebts", 22, "[ENTRY_TYPE] = 'D'", "")
+
+F.Data.Dictionary.Close("dicCredAccts")
+F.Data.Dictionary.Close("dicDebtAccts")
+
+F.Intrinsic.Control.Catch
+F.Intrinsic.Control.CallSub(Error, "Subroutine", V.Ambient.CurrentSubroutine, "ErrorDesc", V.Ambient.ErrorDescription, "ErrorNo", V.Ambient.ErrorNumber)
+F.Intrinsic.Control.EndTry
+Program.Sub.SalesReconciliationPopulation.End
+
+Program.Sub.LCTJforDate.Start
+'F.Intrinsic.Control.Try
+'V.Local.sFilter.Declare(String, "")
+'V.Local.sLinePad.Declare(String, "")
+'V.Local.sSql.Declare(String, "")
+'V.Local.sReturn.Declare(String, "")
+'V.Local.sSOLine.Declare(String, "")
+'V.Local.fLCTJ.Declare(Float, 0.0000)
+'V.Local.iLastAttempt.Declare(Long, 0)
+'V.Local.iLoop.Declare(Long, 0)
+'V.Local.dFrom.Declare(Date, "01/01/1900")
+'V.Local.dTo.Declare(Date, "01/01/1900")
+
+'V.Local.dFrom.Set(V.Screen.F_SalesAnal!dtpFrom.Value)
+'V.Local.dTo.Set(V.Screen.F_SalesAnal!dtpTo.Value)
+
+'F.Intrinsic.String.Build("Select  Job, Suffix, SEQ, Charge_Date, sum(AMOUNT_LABOR + AMT_OVERHEAD + AMT_STANDARD) AS LCTJ FROM V_JOB_DETAIL WHERE LMO = 'Z' AND DESCRIPTION = 'LATE COSTS TO JOBS'  and Charge_Date between '{0}' and '{1}' group by JOB, SUFFIX, Seq, Charge_Date order by LCTJ DESC", V.Local.dFrom.PervasiveDate, V.Local.dTo.PervasiveDate, V.Local.sSql)
+
+'F.Data.DataTable.CreateFromSQL("dtLCTJ", "conx", V.Local.sSql, True)
+
+''This tells us the LCTJ associated with every job/suff/seq:
+''F.Data.Dictionary.CreateFromSQL("dicWOLC", "conx", "Select  Job, Suffix, SEQ, Charge_Date, sum(AMOUNT_LABOR + AMT_OVERHEAD + AMT_STANDARD) AS LCTJ FROM V_JOB_DETAIL WHERE LMO = 'Z' AND DESCRIPTION = 'LATE COSTS TO JOBS' group by JOB, SUFFIX order by LCTJ DESC")
+''F.Data.Dictionary.SetDefaultReturn("dicWOLC", "0.0000")
+
+''We get the Sales order information from the Job_header table
+'F.Data.DataTable.CreateFromSQL("dtJobs", "conx", "Select JOB, SUFFIX, PARENT_WO, PARENT_SUFFIX_PARENT, RTRIM(LTRIM(SALES_ORDER)) as SALES_ORDER, SALES_ORDER_LINE, SALESPERSON from V_JOB_HEADER", True)
+
+'F.Data.DataTable.AddExpressionColumn("dtJobs", "ORG_JOBSUFF", "String", "[JOB] + '-' + [SUFFIX]")
+'F.Data.DataTable.AddExpressionColumn("dtJobs", "PAR_JOBSUFF", "String", "[PARENT_WO] + '-' + [PARENT_SUFFIX_PARENT]")
+
+''First fill the value of LCTJ per job
+'F.Data.DataTable.AddColumn("dtJobs", "LCTJ_JOB", "Float")
+''F.Data.DataTable.FillFromDictionary("dtJobs", "dicWOLC", "ORG_JOBSUFF", "LCTJ_JOB")
+
+''F.Data.Dictionary.Close("dicWOLC")
+
+''Now we need to find the sales order number for all JOBS that are sales-order-less. Due to the fact that there are multiple layers of parents, this will be recursive..
+'F.Data.DataView.Create("dtJobs", "dvFiller", 22, "[SALES_ORDER] = '0000000'", "")
+'F.Data.DataView.SetValue("dtJobs", "dvFiller", -1, "SALES_ORDER", "")
+'F.Data.DataView.Close("dtJobs", "dvFiller")
+
+'F.Data.DataTable.AddColumn("dtJobs", "NEW_SO", "String")
+'F.Data.DataTable.AddColumn("dtJobs", "NEW_SOLN", "String")
+'F.Data.DataTable.AddExpressionColumn("dtJobs", "COMBO_SO", "String", "IIF([SALES_ORDER] <> '', [SALES_ORDER], [NEW_SO])")
+'F.Data.DataTable.AddExpressionColumn("dtJobs", "COMBO_LN", "String", "IIF([SALES_ORDER] <> '', [SALES_ORDER_LINE], [NEW_SOLN])")
+
+'F.Data.DataView.Create("dtJobs", "dvLost", 22, "[SALES_ORDER] = ''", "")
+''F.Data.DataView.ToDataTable("dtJobs", "dvLost", "dtNOSO")
+
+''The process below needs to run until the current number of lines without a sales order is the same as the previous iteration
+'F.Intrinsic.Control.DoUntil(V.Local.iLastAttempt, =, V.DataView.dtJobs!dvLost.RowCount)
+'	V.Local.iLastAttempt.Set(V.DataView.dtJobs!dvLost.RowCount)
+'	
+'	'The idea is that we are going to be creating a dictionary for WO to SO using the actual work order, then filling the same table again with that data but using the parent WO information as the key to fill
+'	F.Data.DataView.Create("dtJobs", "dvWSOLN", 22, "[SALES_ORDER] <> ''", "")
+'	
+'	'Dictionary for the SO
+'	F.Data.Dictionary.CreateFromDataView("dicSO", "dtJobs", "dvWSOLN", "ORG_JOBSUFF", "SALES_ORDER")
+'	F.Data.Dictionary.SetDefaultReturn("dicSO", "")
+'	
+'	'Dictionary for the SO Line
+'	F.Data.Dictionary.CreateFromDataView("dicSOLN", "dtJobs", "dvWSOLN", "ORG_JOBSUFF", "SALES_ORDER_LINE")
+'	F.Data.Dictionary.SetDefaultReturn("dicSOLN", "")
+'	
+'	'Now we go back and fill the NEW columns using the parent as teh key
+'	F.Data.DataTable.FillFromDictionary("dtJobs", "dicSO", "PAR_JOBSUFF", "NEW_SO")
+'	F.Data.DataTable.FillFromDictionary("dtJobs", "dicSOLN", "PAR_JOBSUFF", "NEW_SOLN")
+'	
+'	'Since the COMBO columns are expression columns, they should automatically get updated with both the original sales order or the sales order of the parent. 
+'	'We can then create a dictionary to fill the sales order in the original position, and then repeat the process..
+'	
+'	F.Data.Dictionary.CreateFromDataTable("dicFullSO", "dtJobs", "ORG_JOBSUFF", "COMBO_SO")
+'	F.Data.Dictionary.SetDefaultReturn("dicFullSO", "")
+'	
+'	F.Data.Dictionary.CreateFromDataTable("dicFullSOLN", "dtJobs", "ORG_JOBSUFF", "COMBO_LN")
+'	F.Data.Dictionary.SetDefaultReturn("dicFullSOLN", "")
+'	
+'	F.Data.DataTable.FillFromDictionary("dtJobs", "dicFullSO", "ORG_JOBSUFF", "SALES_ORDER")
+'	F.Data.DataTable.FillFromDictionary("dtJobs", "dicFullSOLN", "ORG_JOBSUFF", "SALES_ORDER_LINE")
+'	
+'	F.Data.Dictionary.Close("dicFullSOLN")
+'	F.Data.Dictionary.Close("dicFullSO")
+'	F.Data.Dictionary.Close("dicSOLN")
+'	F.Data.Dictionary.Close("dicSO")
+'	
+'	F.Data.DataView.Close("dtJobs", "dvWSOLN")
+'	
+'	'This last update of the Sales Order will automatically update the dataview and if the number of rows has not changed, then we can resume the project
+'F.Intrinsic.Control.Loop
+
+''The table dtJobs will have the Sales Order associated with every job, so now all we do is fill the dtLCTJ with teh Sales Order for it
+'F.Data.DataTable.AddColumn("dtLCTJ", "SALES_ORDER", "String")
+'F.Data.DataTable.AddColumn("dtLCTJ", "SALES_ORDER_LINE", "String")
+'F.Data.DataTable.AddColumn("dtLCTJ", "SALESPERSON", "String")
+
+'F.Data.DataTable.AddExpressionColumn("dtLCTJ", "JOBSUFF", "String", "[JOB] + '-' + [SUFFIX]")
+
+''Dictionary for the SO
+'F.Data.Dictionary.CreateFromDataTable("dicSO", "dtJobs", "ORG_JOBSUFF", "SALES_ORDER")
+'F.Data.Dictionary.SetDefaultReturn("dicSO", "")
+
+''Dictionary for the SO Line
+'F.Data.Dictionary.CreateFromDataTable("dicSOLN", "dtJobs", "ORG_JOBSUFF", "SALES_ORDER_LINE")
+'F.Data.Dictionary.SetDefaultReturn("dicSOLN", "")
+
+''Dictionary for the SO
+'F.Data.Dictionary.CreateFromDataTable("dicSP", "dtJobs", "ORG_JOBSUFF", "SALESPERSON")
+'F.Data.Dictionary.SetDefaultReturn("dicSP", "")
+
+'F.Data.DataTable.FillFromDictionary("dtLCTJ", "dicSO", "JOBSUFF", "SALES_ORDER")
+'F.Data.DataTable.FillFromDictionary("dtLCTJ", "dicSOLN", "JOBSUFF", "SALES_ORDER_LINE")
+'F.Data.DataTable.FillFromDictionary("dtLCTJ", "dicSP", "JOBSUFF", "SALESPERSON")
+
+'F.Data.Dictionary.Close("dicSO")
+'F.Data.Dictionary.Close("dicSOLN")
+'F.Data.Dictionary.Close("dicSP")
+
+'F.Data.DataView.Close("dtJobs", "dvLost")
+
+''so now all we do is add those lines to the main table..
+'F.Intrinsic.Control.For(V.Local.iLoop, 0, V.DataTable.dtLCTJ.RowCount--, 1)
+'	
+'	F.Intrinsic.Control.If(V.DataTable.dtLCTJ(V.Local.iLoop).SALES_ORDER!FieldValTrim, <>, "")
+'		
+'		F.Intrinsic.String.RPad(V.DataTable.dtLCTJ(V.Local.iLoop).SALES_ORDER_LINE!FieldValTrim, "0", 4, V.Local.sSOLine)
+'		'First we query the database for the order line info:
+'		F.Intrinsic.String.Build("Select TOP 1 LINE_TYPE, BLANKET_NO, PART, PRODUCT_LINE, INVOICE, CUSTOMER from V_ORDER_LINES where ORDER_NO = '{0}' and RECORD_NO = '{1}'", V.DataTable.dtLCTJ(V.Local.iLoop).SALES_ORDER!FieldValTrim, V.Local.sSOLine, V.Local.sSql)
+'		
+'		F.ODBC.Connection!conx.ExecuteAndReturn(V.Local.sSql, V.Local.sReturn)
+'		F.Intrinsic.Control.If(V.Local.sReturn.Trim, <>, "")
+'			F.Intrinsic.String.Split(V.Local.sReturn, "*!*", V.Local.sReturn)
+'		F.Intrinsic.Control.EndIf
+'		
+'	F.Intrinsic.Control.Else
+'		
+'		'Look at the job header for part info?
+'		F.Intrinsic.String.Build("Select TOP 1 'S' as LINE_TYPE, '' as BLANKET_NO, PART, PRODUCT_LINE, '' as INVOICE, CUSTOMER from V_JOB_HEADER where JOB = '{0}' and SUFFIX = '{1}'", V.DataTable.dtLCTJ(V.Local.iLoop).JOB!FieldValTrim, V.DataTable.dtLCTJ(V.Local.iLoop).SUFFIX!FieldValTrim, V.Local.sSql)
+'		
+'		F.ODBC.Connection!conx.ExecuteAndReturn(V.Local.sSql, V.Local.sReturn)
+'		F.Intrinsic.Control.If(V.Local.sReturn.Trim, <>, "")
+'			F.Intrinsic.String.Split(V.Local.sReturn, "*!*", V.Local.sReturn)
+'		F.Intrinsic.Control.EndIf
+'		
+'	F.Intrinsic.Control.EndIf
+'	
+'	V.Local.sReturn.RedimPreserve(0,5)
+'	
+'	F.Data.DataTable.AddRow("dtDisplay", "ORDER_NO", V.DataTable.dtLCTJ(V.Local.iLoop).SALES_ORDER!FieldValTrim, "SALESPERSON", V.DataTable.dtLCTJ(V.Local.iLoop).SALESPERSON!FieldValTrim, "DATE_INVOICE", V.DataTable.dtLCTJ(V.Local.iLoop).Charge_Date!FieldVal, "CUSTOM_DATE", V.DataTable.dtLCTJ(V.Local.iLoop).Charge_Date!FieldVal, "LCTJ", V.DataTable.dtLCTJ(V.Local.iLoop).LCTJ!FieldValFloat, "LINE_TYPE", V.Local.sReturn(0).Trim, "BLANKET_NO_H", V.Local.sReturn(1).Trim, "PART", V.Local.sReturn(2).Trim, "PRODUCT_LINE", V.Local.sReturn(3).Trim, "INVOICE", V.Local.sReturn(4).Trim, "CUSTOMER", V.Local.sReturn(5).Trim)
+'	
+'F.Intrinsic.Control.Next(V.Local.iLoop)
+
+''It is at this point that we need to build the dictionary based off teh Sales Order, and this one may be tricky since we have to essentially loop through all unique Sales Orders..
+'F.Data.DataView.Create("dtJobs", "dv4SO", 22, "[SALES_ORDER] <> ''", "")
+'F.Data.DataView.ToDataTableDistinct("dtJobs", "dv4SO", "dtSOLCTJ", "SALES_ORDER*!*SALES_ORDER_LINE", True)
+'F.Data.DataView.Close("dtJobs", "dv4SO")
+
+'F.Data.DataTable.AddColumn("dtSOLCTJ", "LCTJ", "Float")
+
+'F.Intrinsic.Control.For(V.Local.iLoop, 0, V.DataTable.dtSOLCTJ.RowCount--, 1)
+'	'We create the filter using the sales order and sales order line
+'	F.Intrinsic.String.Build("SALES_ORDER = '{0}' and SALES_ORDER_LINE = '{1}'", V.DataTable.dtSOLCTJ(V.Local.iLoop).SALES_ORDER!FieldValTrim, V.DataTable.dtSOLCTJ(V.Local.iLoop).SALES_ORDER_LINE!FieldValTrim, V.Local.sFilter)
+'	
+'	F.Data.DataTable.Compute("dtJobs", "SUM(LCTJ_JOB)", V.Local.sFilter, V.Local.fLCTJ)
+'	
+'	F.Intrinsic.String.RPad(V.DataTable.dtSOLCTJ(V.Local.iLoop).SALES_ORDER_LINE!FieldValTrim, "0", 4, V.Local.sLinePad)
+'	
+'	F.Data.DataTable.SetValue("dtSOLCTJ", V.Local.iLoop, "LCTJ", V.Local.fLCTJ, "SALES_ORDER_LINE", V.Local.sLinePad)
+'	
+'F.Intrinsic.Control.Next(V.Local.iLoop)
+
+''Now from here, we can create the dictionary that will return the Late cost to job value when given a Sales Order
+'F.Data.DataTable.AddExpressionColumn("dtSOLCTJ", "SOLN_KEY", "String", "[SALES_ORDER] + '-' + [SALES_ORDER_LINE]")
+
+'F.Data.Dictionary.CreateFromDataTable("dicLCTJSO", "dtSOLCTJ", "SOLN_KEY", "LCTJ")
+'F.Data.Dictionary.SetDefaultReturn("dicLCTJSO", "0.0000")
+
+'F.Data.DataTable.Close("dtSOLCTJ")
+'F.Data.DataTable.Close("dtJobs")
+
+'F.Intrinsic.Control.Catch
+'F.Intrinsic.Control.CallSub(Error, "Subroutine", V.Ambient.CurrentSubroutine, "ErrorDesc", V.Ambient.ErrorDescription, "ErrorNo", V.Ambient.ErrorNumber)
+'F.Intrinsic.Control.EndTry
+Program.Sub.LCTJforDate.End
+
+Program.Sub.ExportToExcel.Start
+F.Intrinsic.Control.Try
+V.Local.sTemp.Declare(String, "")
+V.Local.iHandle.Declare(Long, 0)
+V.Local.bRet.Declare(Boolean, False)
+
+'This subroutine will be attached to all of the grids that are in the form, so we need to check where it was ran from and export that grid
+'The customer just wants the excel to open so we are saving in the temp directory and using the shell excecute to print it
+
+'Check to see if the workstation has MS Excel Installed
+F.Automation.MSExcel.CheckPresence(V.Local.bRet)
+F.Intrinsic.Control.If(V.Local.bRet,=,False)
+	F.Intrinsic.UI.Msgbox("MS Excel is not installed on this workstation. Install MS Excel and attempt the export again.","Missing Components: ")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+'Building the file based off the time:
+F.Intrinsic.File.MakeFilenameFriendly(V.Ambient.Now, V.Local.sTemp)
+F.Intrinsic.String.Replace(V.Local.sTemp, " ", "", V.Local.sTemp)
+F.Intrinsic.String.Build("{0}\{1}.xlsx", V.Caller.TempDir, V.Local.sTemp, V.Local.sTemp)
+
+F.Intrinsic.Control.SelectCase(V.Args.MenuName.UCase)
+F.Intrinsic.Control.Case("CTXANALEXPORT")
+	'export sales analysis grid export
+	Gui.F_SalesAnal.gsgcSalesAnal.Export(V.Local.sTemp, "xlsx")
+F.Intrinsic.Control.Case("CTXACCTEXPORT")
+	'export sales analysis grid export
+	Gui.F_SalesAnal.gsgcSalesAccts.Export(V.Local.sTemp, "xlsx")
+F.Intrinsic.Control.Case("CTXRECONSAEXPORT")
+	'export sales analysis grid export
+	Gui.F_SalesAnal.gsgcReconSales.Export(V.Local.sTemp, "xlsx")
+F.Intrinsic.Control.Case("CTXRECONDBEXPORT")
+	'export sales analysis grid export
+	Gui.F_SalesAnal.gsgcSalesAccts.Export(V.Local.sTemp, "xlsx")
+F.Intrinsic.Control.Case("CTXACCRSAEXPORT")
+	'export sales analysis grid export
+	Gui.F_SalesAnal.gsgcReconSales.Export(V.Local.sTemp, "xlsx")
+F.Intrinsic.Control.Case("CTXACCRDBEXPORT")
+	'export sales analysis grid export
+	Gui.F_SalesAnal.gsgcReconDebts.Export(V.Local.sTemp, "xlsx")
+F.Intrinsic.Control.CaseElse
+	'Some sort of error happened
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndSelect
+
+F.Intrinsic.Task.ShellExec(V.Local.iHandle, "Edit", V.Local.sTemp, "", "", 1)
+
+F.Intrinsic.Control.Catch
+F.Intrinsic.Control.CallSub(Error, "Subroutine", V.Ambient.CurrentSubroutine, "ErrorDesc", V.Ambient.ErrorDescription, "ErrorNo", V.Ambient.ErrorNumber)
+F.Intrinsic.Control.EndTry
+Program.Sub.ExportToExcel.End
+
+Program.Sub.TotalsPopulation.Start
+F.Intrinsic.Control.Try
+V.Local.fSalesTTls.Declare(Float, 0.00)
+V.Local.fDebitTTls.Declare(Float, 0.00)
+
+'The table that will be used to display the totals at teh bottom of the screen will have 3 columns:
+F.Data.DataTable.Create("dtTotals", True)
+F.Data.DataTable.AddColumn("dtTotals", "CAPTIONS", "String")
+F.Data.DataTable.AddColumn("dtTotals", "SA_TOTALS", "Float")
+F.Data.DataTable.AddColumn("dtTotals", "DB_TOTALS", "Float")
+
+'The first row will have the totals of the sales grid, the EXT PRICE for the Sales, and the total cost for the debit side
+F.Data.DataTable.Compute("dtDisplay", "SUM(EXT_PRICE)", "", V.Local.fSalesTTls)
+F.Data.DataTable.Compute("dtDisplay", "SUM(TOTAL_COST)", "", V.Local.fDebitTTls)
+
+F.Data.DataTable.AddRow("dtTotals", "CAPTIONS", "Sales Totals", "SA_TOTALS", V.Local.fSalesTTls, "DB_TOTALS", V.Local.fDebitTTls)
+
+'Now we do the same for the GL ACCOUNTS..
+F.Data.DataTable.Compute("dtDispPrime", "SUM(SA_Trans)", "", V.Local.fSalesTTls)
+F.Data.DataTable.Compute("dtDispPrime", "SUM(DA_Trans)", "", V.Local.fDebitTTls)
+
+F.Data.DataTable.AddRow("dtTotals", "CAPTIONS", "Total GL Transactions", "SA_TOTALS", V.Local.fSalesTTls, "DB_TOTALS", V.Local.fDebitTTls)
+
+'Subtract the values to get the appropriate difference
+F.Intrinsic.Math.Add(V.DataTable.dtTotals(0).SA_TOTALS.FieldValFloat, V.DataTable.dtTotals(1).SA_TOTALS.FieldValFloat, V.Local.fSalesTTls)
+F.Intrinsic.Math.Sub(V.DataTable.dtTotals(0).DB_TOTALS.FieldValFloat, V.DataTable.dtTotals(1).DB_TOTALS.FieldValFloat, V.Local.fDebitTTls)
+
+F.Data.DataTable.AddRow("dtTotals", "CAPTIONS", "Difference", "SA_TOTALS", V.Local.fSalesTTls, "DB_TOTALS", V.Local.fDebitTTls)
+
+'Now we do the same for the GL ACCOUNTS..
+F.Data.DataTable.Compute("dtDispRecon", "SUM(DIFF)", "[ENTRY_TYPE] = 'S'", V.Local.fSalesTTls)
+F.Data.DataTable.Compute("dtDispRecon", "SUM(DIFF)", "[ENTRY_TYPE] = 'D'", V.Local.fDebitTTls)
+
+F.Data.DataTable.AddRow("dtTotals", "CAPTIONS", "Reconciling Items", "SA_TOTALS", V.Local.fSalesTTls, "DB_TOTALS", V.Local.fDebitTTls)
+
+'Last row, the unreconciled items, difference between the last two rows
+F.Intrinsic.Math.Sub(V.DataTable.dtTotals(2).SA_TOTALS.FieldValFloat, V.DataTable.dtTotals(3).SA_TOTALS.FieldValFloat, V.Local.fSalesTTls)
+F.Intrinsic.Math.Sub(V.DataTable.dtTotals(2).DB_TOTALS.FieldValFloat, V.DataTable.dtTotals(3).DB_TOTALS.FieldValFloat, V.Local.fDebitTTls)
+
+F.Data.DataTable.AddRow("dtTotals", "CAPTIONS", "Unreconciled Difference", "SA_TOTALS", V.Local.fSalesTTls, "DB_TOTALS", V.Local.fDebitTTls)
+
+F.Intrinsic.Control.Catch
+F.Intrinsic.Control.CallSub(Error, "Subroutine", V.Ambient.CurrentSubroutine, "ErrorDesc", V.Ambient.ErrorDescription, "ErrorNo", V.Ambient.ErrorNumber)
+F.Intrinsic.Control.EndTry
+Program.Sub.TotalsPopulation.End
+
+Program.Sub.GuidedLCTJ.Start
+F.Intrinsic.Control.Try
+V.Local.sFilter.Declare(String, "")
+V.Local.sLinePad.Declare(String, "")
+V.Local.sSql.Declare(String, "")
+V.Local.sReturn.Declare(String, "")
+V.Local.sPart.Declare(String, "")
+V.Local.sJob.Declare(String, "")
+V.Local.sDesc.Declare(String, "")
+V.Local.sSOHead.Declare(String, "")
+V.Local.sSOLine.Declare(String, "")
+V.Local.sSalesperson.Declare(String, "")
+V.Local.sLostOrders.Declare(String, "")
+V.Local.sDirectory.Declare(String, "")
+V.Local.sDateFile.Declare(String, "")
+V.Local.sTemp.Declare(String, "")
+V.Local.fLCTJ.Declare(Float, 0.0000)
+V.Local.iLastAttempt.Declare(Long, 0)
+V.Local.iLoop.Declare(Long, 0)
+V.Local.dFrom.Declare(Date, "01/01/1900")
+V.Local.dTo.Declare(Date, "01/01/1900")
+V.Local.bCheck.Declare(Boolean, False)
+
+V.Local.dFrom.Set(V.Screen.F_SalesAnal!dtpFrom.Value)
+V.Local.dTo.Set(V.Screen.F_SalesAnal!dtpTo.Value)
+
+F.Intrinsic.Control.If(V.Screen.F_SalesAnal!chkPost.Value, "=", "1")
+	'Original request
+	F.Intrinsic.String.Build("Select GL_NUMBER, POST_DATE_SQL, TRANS_DATE_SQL, BATCH, LINE, RTRIM(LTRIM(REFERENCE)) as REFERENCE, DESCRIPTION, AMOUNT_CMPNY from V_GL_JOURNAL_DTL where BATCH like 'M%' and GL_NUMBER like '5%' and TRANS_DATE_SQL between '{0}' and '{1}' order by line", V.Local.dFrom.PervasiveDate, V.Local.dTo.PervasiveDate, V.Local.sSql)
+	
+F.Intrinsic.Control.Else
+	'Change in date field
+	F.Intrinsic.String.Build("Select GL_NUMBER, POST_DATE_SQL, TRANS_DATE_SQL, BATCH, LINE, RTRIM(LTRIM(REFERENCE)) as REFERENCE, DESCRIPTION, AMOUNT_CMPNY from V_GL_JOURNAL_DTL where BATCH like 'M%' and GL_NUMBER like '5%' and POST_DATE_SQL between '{0}' and '{1}' order by line", V.Local.dFrom.PervasiveDate, V.Local.dTo.PervasiveDate, V.Local.sSql)
+	
+F.Intrinsic.Control.EndIf
+
+F.Data.DataTable.CreateFromSQL("dtLCTJGuided", "conx", V.Local.sSql, True)
+
+'This tells us the LCTJ associated with every job/suff/seq:
+'F.Data.Dictionary.CreateFromSQL("dicWOLC", "conx", "Select  Job, Suffix, SEQ, Charge_Date, sum(AMOUNT_LABOR + AMT_OVERHEAD + AMT_STANDARD) AS LCTJ FROM V_JOB_DETAIL WHERE LMO = 'Z' AND DESCRIPTION = 'LATE COSTS TO JOBS' group by JOB, SUFFIX order by LCTJ DESC")
+'F.Data.Dictionary.SetDefaultReturn("dicWOLC", "0.0000")
+
+'We get the Sales order information from the Job_header table
+F.Data.DataTable.CreateFromSQL("dtJobs", "conx", "Select JOB, SUFFIX, PARENT_WO, PARENT_SUFFIX_PARENT, RTRIM(LTRIM(SALES_ORDER)) as SALES_ORDER, SALES_ORDER_LINE, SALESPERSON from V_JOB_HEADER", True)
+
+F.Data.DataTable.AddExpressionColumn("dtJobs", "ORG_JOBSUFF", "String", "[JOB] + '-' + [SUFFIX]")
+F.Data.DataTable.AddExpressionColumn("dtJobs", "PAR_JOBSUFF", "String", "[PARENT_WO] + '-' + [PARENT_SUFFIX_PARENT]")
+
+'First fill the value of LCTJ per job
+F.Data.DataTable.AddColumn("dtJobs", "LCTJ_JOB", "Float")
+
+'Now we need to find the sales order number for all JOBS that are sales-order-less. Due to the fact that there are multiple layers of parents, this will be recursive..
+F.Data.DataView.Create("dtJobs", "dvFiller", 22, "[SALES_ORDER] = '0000000'", "")
+F.Data.DataView.SetValue("dtJobs", "dvFiller", -1, "SALES_ORDER", "")
+F.Data.DataView.Close("dtJobs", "dvFiller")
+
+F.Data.DataTable.AddColumn("dtJobs", "NEW_SO", "String")
+F.Data.DataTable.AddColumn("dtJobs", "NEW_SOLN", "String")
+F.Data.DataTable.AddExpressionColumn("dtJobs", "COMBO_SO", "String", "IIF([SALES_ORDER] <> '', [SALES_ORDER], [NEW_SO])")
+F.Data.DataTable.AddExpressionColumn("dtJobs", "COMBO_LN", "String", "IIF([SALES_ORDER] <> '', [SALES_ORDER_LINE], [NEW_SOLN])")
+
+F.Data.DataView.Create("dtJobs", "dvLost", 22, "[SALES_ORDER] = ''", "")
+
+'we may not need this?
+
+'The process below needs to run until the current number of lines without a sales order is the same as the previous iteration
+F.Intrinsic.Control.DoUntil(V.Local.iLastAttempt, =, V.DataView.dtJobs!dvLost.RowCount)
+	V.Local.iLastAttempt.Set(V.DataView.dtJobs!dvLost.RowCount)
+	
+	'The idea is that we are going to be creating a dictionary for WO to SO using the actual work order, then filling the same table again with that data but using the parent WO information as the key to fill
+	F.Data.DataView.Create("dtJobs", "dvWSOLN", 22, "[SALES_ORDER] <> ''", "")
+	
+	'Dictionary for the SO
+	F.Data.Dictionary.CreateFromDataView("dicSO", "dtJobs", "dvWSOLN", "ORG_JOBSUFF", "SALES_ORDER")
+	F.Data.Dictionary.SetDefaultReturn("dicSO", "")
+	
+	'Dictionary for the SO Line
+	F.Data.Dictionary.CreateFromDataView("dicSOLN", "dtJobs", "dvWSOLN", "ORG_JOBSUFF", "SALES_ORDER_LINE")
+	F.Data.Dictionary.SetDefaultReturn("dicSOLN", "")
+	
+	'Now we go back and fill the NEW columns using the parent as teh key
+	F.Data.DataTable.FillFromDictionary("dtJobs", "dicSO", "PAR_JOBSUFF", "NEW_SO")
+	F.Data.DataTable.FillFromDictionary("dtJobs", "dicSOLN", "PAR_JOBSUFF", "NEW_SOLN")
+	
+	'Since the COMBO columns are expression columns, they should automatically get updated with both the original sales order or the sales order of the parent. 
+	'We can then create a dictionary to fill the sales order in the original position, and then repeat the process..
+	
+	F.Data.Dictionary.CreateFromDataTable("dicFullSO", "dtJobs", "ORG_JOBSUFF", "COMBO_SO")
+	F.Data.Dictionary.SetDefaultReturn("dicFullSO", "")
+	
+	F.Data.Dictionary.CreateFromDataTable("dicFullSOLN", "dtJobs", "ORG_JOBSUFF", "COMBO_LN")
+	F.Data.Dictionary.SetDefaultReturn("dicFullSOLN", "")
+	
+	F.Data.DataTable.FillFromDictionary("dtJobs", "dicFullSO", "ORG_JOBSUFF", "SALES_ORDER")
+	F.Data.DataTable.FillFromDictionary("dtJobs", "dicFullSOLN", "ORG_JOBSUFF", "SALES_ORDER_LINE")
+	
+	F.Data.Dictionary.Close("dicFullSOLN")
+	F.Data.Dictionary.Close("dicFullSO")
+	F.Data.Dictionary.Close("dicSOLN")
+	F.Data.Dictionary.Close("dicSO")
+	
+	F.Data.DataView.Close("dtJobs", "dvWSOLN")
+	
+	'This last update of the Sales Order will automatically update the dataview and if the number of rows has not changed, then we can resume the project
+F.Intrinsic.Control.Loop
+
+'I imagine at this point we would create dictionaries from teh dtJobs table to fill in data in the Display table..
+'F.Data.DataTable.AddColumn("dtLCTJGuided", "SALES_ORDER", "String")
+'F.Data.DataTable.AddColumn("dtLCTJGuided", "SALES_ORDER_LINE", "String")
+'F.Data.DataTable.AddColumn("dtLCTJGuided", "SALESPERSON", "String")
+'F.Data.DataTable.AddColumn("dtLCTJGuided", "JOB", "String")
+'F.Data.DataTable.AddColumn("dtLCTJGuided", "SUFFIX", "String")
+
+'Dictionary for the SO
+F.Data.Dictionary.CreateFromDataTable("dicSO", "dtJobs", "ORG_JOBSUFF", "SALES_ORDER")
+F.Data.Dictionary.SetDefaultReturn("dicSO", "")
+
+'Dictionary for the SO Line
+F.Data.Dictionary.CreateFromDataTable("dicSOLN", "dtJobs", "ORG_JOBSUFF", "SALES_ORDER_LINE")
+F.Data.Dictionary.SetDefaultReturn("dicSOLN", "")
+
+'Dictionary for the SO
+F.Data.Dictionary.CreateFromDataTable("dicSP", "dtJobs", "ORG_JOBSUFF", "SALESPERSON")
+F.Data.Dictionary.SetDefaultReturn("dicSP", "")
+
+'F.Data.DataTable.FillFromDictionary("dtLCTJGuided", "dicSO", "REFERENCE", "SALES_ORDER")
+'F.Data.DataTable.FillFromDictionary("dtLCTJGuided", "dicSOLN", "REFERENCE", "SALES_ORDER_LINE")
+'F.Data.DataTable.FillFromDictionary("dtLCTJGuided", "dicSP", "REFERENCE", "SALESPERSON")
+
+'F.Data.Dictionary.Close("dicSO")
+'F.Data.Dictionary.Close("dicSOLN")
+'F.Data.Dictionary.Close("dicSP")
+
+'F.Data.DataView.Close("dtJobs", "dvLost")
+
+F.Intrinsic.Control.For(V.Local.iLoop, 0, V.DataTable.dtLCTJGuided.RowCount--, 1)
+	
+'	SALESPERSON, INVOICE, CUSTOMER, ORDER_NO, ORDER_SUFFIX, ORDER_LINE, LINE_TYPE, PART, PRODUCT_LINE, DATE_INVOICE, DESCRIPTION, CUSTOM_DATE, BLANKET_NO_H, LCTJ
+	
+'	ORDER_LINE, 
+	
+	'The Job-Suffix will be in the Description column.. We need to parse the Desc value by the : and the value after the : is the job-suffix
+	
+	F.Intrinsic.String.Split(V.DataTable.dtLCTJGuided(V.Local.iLoop).DESCRIPTION!FieldValTrim , ":", V.Local.sDesc)
+	V.Local.sDesc.RedimPreserve(0,1)
+	F.Intrinsic.String.Replace(V.Local.sDesc(1).Trim, " ", "", V.Local.sJob)
+	
+	V.Local.sSOHead.Set(V.Dictionary.dicSO![V.Local.sJob.Trim])
+	V.Local.sSOLine.Set(V.Dictionary.dicSOLN![V.Local.sJob.Trim])
+	V.Local.sSalesperson.Set(V.Dictionary.dicSP![V.Local.sJob.Trim])
+	
+	F.Intrinsic.String.Split(V.Local.sJob, "-", V.Local.sJob)
+	V.Local.sJob.RedimPreserve(0,1)
+	
+	F.Intrinsic.Control.If(V.Local.sSOHead.Trim, <>, "")
+		
+		F.Intrinsic.String.RPad(V.Local.sSOLine, "0", 4, V.Local.sSOLine)
+		'First we query the database for the order line info:
+		F.Intrinsic.String.Build("Select TOP 1 LINE_TYPE, BLANKET_NO, PART, PRODUCT_LINE, INVOICE, CUSTOMER from V_ORDER_LINES where ORDER_NO = '{0}' and RECORD_NO = '{1}'", V.Local.sSOHead, V.Local.sSOLine, V.Local.sSql)
+		
+		F.ODBC.Connection!conx.ExecuteAndReturn(V.Local.sSql, V.Local.sReturn)
+		F.Intrinsic.Control.If(V.Local.sReturn.Trim, <>, "")
+			F.Intrinsic.String.Split(V.Local.sReturn, "*!*", V.Local.sReturn)
+		F.Intrinsic.Control.Else
+			
+			F.Intrinsic.String.Build("Select TOP 1 LINE_TYPE, BLANKET_NO, PART, PRODUCT_LINE, INVOICE, CUSTOMER from V_ORDER_HIST_LINE where ORDER_NO = '{0}' and ORDER_LINE = '{1}' ORDER BY ORDER_SUFFIX ASC", V.Local.sSOHead, V.Local.sSOLine, V.Local.sSql)
+			
+			F.ODBC.Connection!conx.ExecuteAndReturn(V.Local.sSql, V.Local.sReturn)
+			F.Intrinsic.Control.If(V.Local.sReturn.Trim, <>, "")
+				F.Intrinsic.String.Split(V.Local.sReturn, "*!*", V.Local.sReturn)
+			F.Intrinsic.Control.Else
+				'Trying the header then I guess...
+				F.Intrinsic.String.Build("Select TOP 1 'S' as LINE_TYPE, '' as BLANKET_NO, PART, PROD_LINE, '' as INVOICE, CUSTOMER from V_ORDER_DELETES where ORDER_NO = '{0}' and ORDER_LINE = '{1}'", V.Local.sSOHead, V.Local.sSOLine, V.Local.sSql)
+				
+				F.ODBC.Connection!conx.ExecuteAndReturn(V.Local.sSql, V.Local.sReturn)
+				F.Intrinsic.Control.If(V.Local.sReturn.Trim, <>, "")
+					F.Intrinsic.String.Split(V.Local.sReturn, "*!*", V.Local.sReturn)
+				F.Intrinsic.Control.Else
+					
+					F.Intrinsic.String.Build("Select TOP 1 'S' as LINE_TYPE, '' as BLANKET_NO, PART, PROD_LINE, '' as NVOICE, CUSTOMER from V_ORDER_BOOKING where ORDER_NO = '{0}' and ORDER_LINE = '{1}'", V.Local.sSOHead, V.Local.sSOLine, V.Local.sSql)
+					
+					F.ODBC.Connection!conx.ExecuteAndReturn(V.Local.sSql, V.Local.sReturn)
+					F.Intrinsic.Control.If(V.Local.sReturn.Trim, <>, "")
+						F.Intrinsic.String.Split(V.Local.sReturn, "*!*", V.Local.sReturn)
+						
+					F.Intrinsic.Control.Else
+						F.Intrinsic.String.Build("{0}Job:{1}, Order No:{2}, Order Line:{3}{4}", V.Local.sLostOrders, V.Local.sJob, V.Local.sSOHead, V.Local.sSOLine, V.Ambient.NewLine, V.Local.sLostOrders)
+					F.Intrinsic.Control.EndIf
+					
+				F.Intrinsic.Control.EndIf
+				
+			F.Intrinsic.Control.EndIf
+			
+		F.Intrinsic.Control.EndIf
+		
+	F.Intrinsic.Control.Else
+		
+		'Look at the job header for part info?
+		F.Intrinsic.String.Build("Select TOP 1 'S' as LINE_TYPE, '' as BLANKET_NO, PART, PRODUCT_LINE, '' as INVOICE, CUSTOMER from V_JOB_HEADER where JOB = '{0}' and SUFFIX = '{1}'", V.Local.sJob(0).Trim, V.Local.sJob(1).Trim, V.Local.sSql)
+		
+		F.ODBC.Connection!conx.ExecuteAndReturn(V.Local.sSql, V.Local.sReturn)
+		F.Intrinsic.Control.If(V.Local.sReturn.Trim, <>, "")
+			F.Intrinsic.String.Split(V.Local.sReturn, "*!*", V.Local.sReturn)
+		F.Intrinsic.Control.Else
+			F.Intrinsic.String.Build("{0}Job:{1}, Order No:{2}, Order Line:{3}{4}", V.Local.sLostOrders, V.Local.sJob, V.Local.sSOHead, V.Local.sSOLine, V.Ambient.NewLine, V.Local.sLostOrders)
+		F.Intrinsic.Control.EndIf
+		
+	F.Intrinsic.Control.EndIf
+	
+	V.Local.sReturn.RedimPreserve(0,5)
+	
+	F.Intrinsic.Control.If(V.Local.sReturn(1), =, "0000000")
+		V.Local.sReturn(1).Set("")
+	F.Intrinsic.Control.EndIf
+	
+	'They want to exclusively get the part number from the work order associated with the LCTJ
+	F.Intrinsic.String.Build("Select TOP 1 PART from V_JOB_HEADER where JOB = '{0}' and SUFFIX = '{1}'", V.Local.sJob(0).Trim, V.Local.sJob(1).Trim, V.Local.sSql)
+	F.ODBC.Connection!conx.ExecuteAndReturn(V.Local.sSql, V.Local.sPart)
+	
+	F.Intrinsic.String.Build("select TOP 1 DESCRIPTION from V_INVENTORY_MSTR where PART = '{0}'", V.Local.sPart, V.Local.sSql)
+	F.ODBC.Connection!conx.ExecuteAndReturn(V.Local.sSql, V.Local.sDesc)
+	
+	F.Intrinsic.String.Build("{0}-{1}", V.Local.sJob(0), V.Local.sJob(1), V.Local.sTemp)
+	
+	F.Data.DataTable.AddRow("dtDisplay", "ORDER_NO", V.Local.sSOHead, "ORDER_LINE", V.Local.sSOLine, "SALESPERSON", V.Local.sSalesperson, "DATE_INVOICE", V.DataTable.dtLCTJGuided(V.Local.iLoop).POST_DATE_SQL!FieldVal, "CUSTOM_DATE", V.DataTable.dtLCTJGuided(V.Local.iLoop).TRANS_DATE_SQL!FieldVal, "LCTJ", V.DataTable.dtLCTJGuided(V.Local.iLoop).AMOUNT_CMPNY!FieldValFloat, "LINE_TYPE", "S", "DESCRIPTION", V.Local.sDesc, "BLANKET_NO_H", V.Local.sReturn(1).Trim, "PART", V.Local.sPart, "PRODUCT_LINE", V.Local.sReturn(3).Trim, "INVOICE", V.Local.sReturn(4).Trim, "CUSTOMER", V.Local.sReturn(5).Trim, "QTY_SHIPPED", "0.0000", "PRICE", "0.0000", "COST", "0.0000", "JOB_SUFFIX", V.Local.sTemp)
+
+F.Intrinsic.Control.Next(V.Local.iLoop)
+
+F.Data.Dictionary.Close("dicSO")
+F.Data.Dictionary.Close("dicSOLN")
+F.Data.Dictionary.Close("dicSP")
+
+F.Data.DataView.Close("dtJobs", "dvLost")
+
+'Going to print the stuff that was in the lostorders if any:
+F.Intrinsic.Control.If(V.Local.sLostOrders.Trim, <>, "")
+	F.Intrinsic.String.Build("{0}\Custom\6236\", V.Caller.GlobalDir, V.Local.sDirectory)
+	F.Intrinsic.File.DirExists(V.Local.sDirectory, V.Local.bCheck)
+	F.Intrinsic.Control.If(V.Local.bCheck.Not)
+		F.Intrinsic.File.CreateDir(V.Local.sDirectory)
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.File.MakeFilenameFriendly(V.Ambient.Now, V.Local.sDateFile)
+	F.Intrinsic.String.Build("{0}LOSTORDERS{1}.txt", V.Local.sDirectory, V.Local.sDateFile, V.Local.sDirectory)
+	
+	F.Intrinsic.File.String2File(V.Local.sDirectory, V.Local.sLostOrders)
+	
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.Catch
+F.Intrinsic.Control.CallSub(Error, "Subroutine", V.Ambient.CurrentSubroutine, "ErrorDesc", V.Ambient.ErrorDescription, "ErrorNo", V.Ambient.ErrorNumber)
+F.Intrinsic.Control.EndTry
+Program.Sub.GuidedLCTJ.End
+
+Program.Sub.CheckingCheckboxes.Start
+F.Intrinsic.Control.Try
+
+F.Intrinsic.Control.BlockEvents
+
+'In this subroutine, we will uncheck the other checkbox
+F.Intrinsic.Control.If(V.Args.CONTROLNAME.UCase, =, "CHKINVOICE")
+	Gui.F_SalesAnal.chkPost.Value(False)
+F.Intrinsic.Control.Else
+	Gui.F_SalesAnal.chkInvoice.Value(False)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.UnBlockEvents
+
+F.Intrinsic.Control.Catch
+F.Intrinsic.Control.CallSub(Error, "Subroutine", V.Ambient.CurrentSubroutine, "ErrorDesc", V.Ambient.ErrorDescription, "ErrorNo", V.Ambient.ErrorNumber)
+F.Intrinsic.Control.EndTry
+Program.Sub.CheckingCheckboxes.End
+
+Program.Sub.SalesAccrualsPopulation.Start
+F.Intrinsic.Control.Try
+V.Local.sSql.Declare(String, "")
+V.Local.iLoop.Declare(Long, 0)
+V.Local.dFrom.Declare(Date, "01/01/1900")
+V.Local.dTo.Declare(Date, "01/01/1900")
+
+V.Local.dFrom.Set(V.Screen.F_SalesAnal!dtpFrom.Value)
+V.Local.dTo.Set(V.Screen.F_SalesAnal!dtpTo.Value)
+
+'We have four requirements when looking for reconciliation items:
+'We are looking for items that have a transaction code of ?J52? for parts with a product line of AP or AT.
+'We are looking for any items in the GL Inventory Details that have a customer of 'CUTCAN'.
+'We are looking for any items in the GL AP items that have a batch code that begins with anything except 'E'.
+'We are looking for any items in the GL AR items that have a batch code that begins with anything except 'S'.
+
+'These are further restricted by the account numbers that were pulled in to fill the GL Account info:
+
+'F.Intrinsic.String.Build("select GL_NUMBER, BATCH, LINE, SEQ, REFERENCE, DESCRIPTION, AMOUNT_CMPNY, TRAN_TYPE, TRANS_DATE_SQL  from V_GL_DETAIL where SUBSTRING(BATCH, 1,1) not in ('E', 'M') and TRANS_DATE_SQL between '{0}' and '{1}'", V.Local.dFrom.PervasiveDate, V.Local.dTo.PervasiveDate, V.Local.sSql)
+F.Intrinsic.String.Build("select GL_NUMBER, BATCH, LINE, SEQ, REFERENCE, DESCRIPTION, AMOUNT_CMPNY, TRAN_TYPE, TRANS_DATE_SQL from V_GL_DETAIL where SUBSTRING(BATCH, 1,1) not in ('S') and GL_NUMBER = '40090' and TRANS_DATE_SQL between '{0}' and '{1}'", V.Local.dFrom.PervasiveDate, V.Local.dTo.PervasiveDate, V.Local.sSql)
+
+F.Data.DataTable.CreateFromSQL("dtAccrualsSales", "conx", V.Local.sSql, True)
+
+'F.Intrinsic.String.Build("select GL_NUMBER, BATCH, LINE, SEQ, REFERENCE, DESCRIPTION, AMOUNT_CMPNY, TRAN_TYPE, TRANS_DATE_SQL  from V_GL_DETAIL where SUBSTRING(BATCH, 1,1) not in ('S', 'M') and TRANS_DATE_SQL between '{0}' and '{1}'", V.Local.dFrom.PervasiveDate, V.Local.dTo.PervasiveDate, V.Local.sSql)
+'Bottom section
+F.Intrinsic.String.Build("select GL_NUMBER, BATCH, LINE, SEQ, REFERENCE, DESCRIPTION, AMOUNT_CMPNY, TRAN_TYPE, TRANS_DATE_SQL from V_GL_DETAIL where SUBSTRING(BATCH, 1,1) not in ('E', 'M') and GL_NUMBER in ('51060', '53070') and TRANS_DATE_SQL between '{0}' and '{1}'", V.Local.dFrom.PervasiveDate, V.Local.dTo.PervasiveDate, V.Local.sSql)
+
+F.Data.DataTable.CreateFromSQL("dtAccrualsDebts", "conx", V.Local.sSql, True)
+
+F.Data.DataTable.Create("dtDispAccruals", True)
+F.Data.DataTable.AddColumn("dtDispAccruals", "CUST_DESC", "String")
+F.Data.DataTable.AddColumn("dtDispAccruals", "CUST_NO", "String")
+F.Data.DataTable.AddColumn("dtDispAccruals", "SO_NO", "String")
+F.Data.DataTable.AddColumn("dtDispAccruals", "INVOICE_NO", "String")
+F.Data.DataTable.AddColumn("dtDispAccruals", "MONTH", "String")
+F.Data.DataTable.AddColumn("dtDispAccruals", "PER_GL", "Float")
+F.Data.DataTable.AddColumn("dtDispAccruals", "PER_SALES", "Float")
+F.Data.DataTable.AddColumn("dtDispAccruals", "DIFF", "Float")
+F.Data.DataTable.AddColumn("dtDispAccruals", "DESCRIPTION", "String")
+F.Data.DataTable.AddColumn("dtDispAccruals", "ENTRY_TYPE", "String")
+F.Data.DataTable.AddColumn("dtDispAccruals", "BATCH_NO", "String")
+F.Data.DataTable.AddColumn("dtDispAccruals", "GL_NUMBER", "String")
+F.Data.DataTable.AddColumn("dtDispAccruals", "TRANS_DATE", "Date")
+
+'First we are going to add the lines for the sales, Entry type 'S'
+F.Data.DataView.Create("dtAccrualsSales", "dvToDisplay", 22, "", "")
+F.Intrinsic.Control.For(V.Local.iLoop, 0, V.DataView.dtAccrualsSales!dvToDisplay.RowCount--, 1)
+	'Extracting data from this table to add a line in the display table
+	F.Data.DataTable.AddRow("dtDispAccruals", "CUST_DESC", "", "CUST_NO", "", "SO_NO", "", "INVOICE_NO", "", "MONTH", "", "PER_GL", V.DataView.dtAccrualsSales!dvToDisplay(V.Local.iLoop).AMOUNT_CMPNY!FieldValFloat, "PER_SALES", "0.0000", "DIFF", V.DataView.dtAccrualsSales!dvToDisplay(V.Local.iLoop).AMOUNT_CMPNY!FieldValFloat, "DESCRIPTION", V.DataView.dtAccrualsSales!dvToDisplay(V.Local.iLoop).DESCRIPTION!FieldValTrim, "ENTRY_TYPE", "S", "BATCH_NO", V.DataView.dtAccrualsSales!dvToDisplay(V.Local.iLoop).BATCH!FieldValTrim, "GL_NUMBER", V.DataView.dtAccrualsSales!dvToDisplay(V.Local.iLoop).GL_NUMBER!FieldValTrim, "TRANS_DATE", V.DataView.dtAccrualsSales!dvToDisplay(V.Local.iLoop).TRANS_DATE_SQL!FieldVal)
+F.Intrinsic.Control.Next(V.Local.iLoop)
+
+'Now add teh lines for the debts, Entry type 'D'
+F.Data.DataView.Create("dtAccrualsDebts", "dvToDisplay", 22, "", "")
+F.Intrinsic.Control.For(V.Local.iLoop, 0, V.DataView.dtAccrualsDebts!dvToDisplay.RowCount--, 1)
+	'Extracting data from this table to add a line in the display table
+	F.Data.DataTable.AddRow("dtDispAccruals", "CUST_DESC", "", "CUST_NO", "", "SO_NO", "", "INVOICE_NO", "", "MONTH", "", "PER_GL", "0.0000", "PER_SALES", V.DataView.dtAccrualsDebts!dvToDisplay(V.Local.iLoop).AMOUNT_CMPNY!FieldValFloat, "DIFF", V.DataView.dtAccrualsDebts!dvToDisplay(V.Local.iLoop).AMOUNT_CMPNY!FieldValFloat, "DESCRIPTION", V.DataView.dtAccrualsDebts!dvToDisplay(V.Local.iLoop).DESCRIPTION!FieldValTrim, "ENTRY_TYPE", "D", "BATCH_NO", V.DataView.dtAccrualsDebts!dvToDisplay(V.Local.iLoop).BATCH!FieldValTrim, "GL_NUMBER", V.DataView.dtAccrualsDebts!dvToDisplay(V.Local.iLoop).GL_NUMBER!FieldValTrim, "TRANS_DATE", V.DataView.dtAccrualsDebts!dvToDisplay(V.Local.iLoop).TRANS_DATE_SQL!FieldVal)
+F.Intrinsic.Control.Next(V.Local.iLoop)
+
+F.Data.DataView.Create("dtDispAccruals", "dvAccrSales", 22, "[ENTRY_TYPE] = 'S'", "")
+F.Data.DataView.Create("dtDispAccruals", "dvAccrDebts", 22, "[ENTRY_TYPE] = 'D'", "")
+
+F.Data.DataView.Close("dtAccrualsSales", "dvToDisplay")
+F.Data.DataTable.Close("dtAccrualsSales")
+F.Data.DataView.Close("dtAccrualsDebts", "dvToDisplay")
+F.Data.DataTable.Close("dtAccrualsDebts")
+
+F.Intrinsic.Control.Catch
+F.Intrinsic.Control.CallSub(Error, "Subroutine", V.Ambient.CurrentSubroutine, "ErrorDesc", V.Ambient.ErrorDescription, "ErrorNo", V.Ambient.ErrorNumber)
+F.Intrinsic.Control.EndTry
+Program.Sub.SalesAccrualsPopulation.End
